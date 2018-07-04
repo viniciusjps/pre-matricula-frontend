@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/style.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		
+		<!--SCRIPTS DO SEMANTIC UI-->
+		<link rel="stylesheet" type="text/css" href="node_modules/semantic-ui-css/semantic.min.css">
+		<script src="node_modules/semantic-ui-css/semantic.min.js"></script>
+	</head>
+	<body>
+		<div id="app" class="ui container">
+			<p> {{ message }} </p>
+			<div class="ui input">
+				<input v-model="message">
+			</div>
+			<hr class="ui divider">
+
+			<div>
+				<button class="mini ui teal button" v-on:click="setMode">Mode</button>
+				<span v-if="seen">Now you see me</span>
+			</div>
+			<hr class="ui divider">
+
+			<li v-for="todo in todos"> {{ todo.text }} </li>
+			<hr class="ui divider">
+
+			<div>
+				<p>{{ message }}</p>
+				<button v-on:click="reverseMessage" class="mini ui olive button"> Reverse Message </button>
+			</div>
+			<hr class="ui divider">
+
+			<div>
+				<ol>
+					<todo-item
+						v-for="item in groceryList"
+						v-bind:todo="item"
+						v-bind:key="item.id">
+					</todo-item>
+				</ol>
+			</div>
+		</div>
+		<script src="client.js"></script>
+	</body>
+</html>
