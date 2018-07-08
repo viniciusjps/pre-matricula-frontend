@@ -2,10 +2,10 @@
   "name": "sistema-pre-matricula",
   "version": "0.1.0",
   "description": "Sistema de Pre Matricula UFCG",
-  "author": [
-    "Vinicius Jorge Pereira <vinicius.jorge.silva@ccc.ufcg.edu.br>",
-    ""
-  ],
+  "author": {
+    "name":"Vinicius Jorge Pereira <vinicius.jorge.silva@ccc.ufcg.edu.br>",
+    "name2": "Hemillainy Santos <hemillainy.santos@ccc.ufcg.edu.br>"
+  },
   "private": true,
   "scripts": {
     "watchify": "watchify -vd -p browserify-hmr -e src/main.js -o dist/build.js",
