@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Sistema de Pre Matricula UFCG",
   "author": {
-    "name":"Vinicius Jorge Pereira <vinicius.jorge.silva@ccc.ufcg.edu.br>",
+    "name": "Vinicius Jorge Pereira <vinicius.jorge.silva@ccc.ufcg.edu.br>",
     "name2": "Hemillainy Santos <hemillainy.santos@ccc.ufcg.edu.br>"
   },
   "private": true,
@@ -24,6 +24,7 @@
     "vue": "vue/dist/vue.common.js"
   },
   "dependencies": {
+    "semantic-ui-vue": "^0.2.11",
     "vue": "^2.0.1"
   },
   "devDependencies": {
