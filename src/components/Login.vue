@@ -59,7 +59,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .ui.fluid.button {
 	color: #FFFFFF;
@@ -69,4 +68,5 @@ export default {
 .ui.stacked.segment {
 	border-top: 2px solid #74accb!important
 }
+
 </style>
