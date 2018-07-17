@@ -6,13 +6,15 @@
                     <i class="home icon"></i> Home
                 </a>
                 <a class="item">
-                    <i class="mail icon"></i> Messages
+                    <i class="mail icon"></i> Disciplinas
                 </a>
                 <a class="item">
-                    <i class="user icon"></i> Friends
+                    <i class="user icon"></i> Realizar Matrícula
                 </a>
                 <div class="right menu">
-                    <a class="ui item"> Logout</a>
+                    <a class="ui item">
+                    Logout
+                    </a>
                 </div>
             </div>
         </div>
