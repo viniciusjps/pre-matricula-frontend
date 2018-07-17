@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "semantic-ui-vue": "^0.2.11",
-    "vue": "^2.0.1"
+    "vue": "^2.0.1",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
