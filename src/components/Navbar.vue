@@ -6,10 +6,10 @@
                     <i class="home icon"></i> Home
                 </a>
                 <a class="item">
-                    <i class="mail icon"></i> Disciplinas
+                    <i class="th icon"></i> Disciplinas
                 </a>
                 <a class="item">
-                    <i class="user icon"></i> Realizar Matrícula
+                    <i class="tasks icon"></i> Realizar Matrícula
                 </a>
                 <div class="right menu">
                     <a class="ui item">
