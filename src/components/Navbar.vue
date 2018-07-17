@@ -12,15 +12,7 @@
                     <i class="user icon"></i> Friends
                 </a>
                 <div class="right menu">
-                    <div class="item">
-                        <div class="ui transparent icon input">
-                            <input type="text" placeholder="Search...">
-                            <i class="search link icon"></i>
-                        </div>
-                    </div>
-                    <a class="ui item">
-                    Logout
-                    </a>
+                    <a class="ui item"> Logout</a>
                 </div>
             </div>
         </div>
