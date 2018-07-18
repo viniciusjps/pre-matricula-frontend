@@ -16,9 +16,11 @@
 <script>
 import Vue from 'vue'
 import Router from 'vue-router'
+import SignIn from './SigninButton.vue'
+
 Vue.use(Router);
 var router = new Router();
-import SignIn from './SigninButton.vue'
+
 export default {
   name: "login",
   components: {
@@ -38,17 +40,15 @@ export default {
       return regularExpression.exec(email) != null;
     },
     onSignIn(response) {
-      var perfil = response.getBasicProfile();
-      var userEmail = perfil.getEmail();
+      var profile = response.getBasicProfile();
+      var userEmail = profile.getEmail();
       if (this.verifyUser(userEmail)) {
-        // muda para rota do usuario 
         router.push({ path: '/home' })
         location.reload();
-      }
-      else {
+      } else {
         router.push({ path: '/404' })
         location.reload();
-      }
+      };
     },
     verifyUser(email) { 
       var emails = [
