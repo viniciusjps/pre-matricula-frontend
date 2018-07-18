@@ -1,72 +1,74 @@
 <template>
-	<div id="login" class="ui middle aligned center aligned grid">
-		<div class="column" style="max-width: 450px">
-			<br><br><br><br><br><br><br><br><br><br>
-			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" data-width="370" data-height="50" data-longtitle="true" data-lang="pt-BR"></div>
-			<h2 class="ui grey image header">
-				<i class="user icon"></i>
-				<div class="content">
-					Entre com a sua conta
-				</div>
-				<br>
-			</h2>
-			<form class="ui larg form">
-				<div class="ui stacked segment">
-					<div class="field">
-						<div class="ui labeled icon input">
-							<div class="ui label">Matricula</div>
-							<input v-model="matriculation" type="text" placeholder="Digite sua matricula" id="matriculation">
-							<i class="user icon"></i>
-						</div>
-					</div>
-					<div class="field">
-						<div class="ui labeled icon input">
-							<div class="ui label">Senha</div>
-							<input v-model="password" type="password" placeholder="Digite sua senha" id="password">
-							<i class="lock icon"></i>
-						</div>
-					</div>
-					<br>
-					<button class="ui fluid button" @click="setMatriculation(matriculation.value); setPassword(password.value)">
-						Entrar
-					</button>
-				</div>
-			</form>
+	<div>
+		<br><br><br><br> 
+		<br><br><br><br>
+		<div id="logo-ccc" class="ui middle aligned center aligned grid">
+			<img src="http://www.dsc.ufcg.edu.br/~sacc/img/logo-topo2.png">		
+		</div>
+		<div id="google-signin-btn">
+			<br><br><br><br> 
+			<br><br><br><br>
+			<g-signin-button @done="onSignIn"/>
 		</div>
 	</div>
 </template>
 
 <script>
+import Vue from 'vue'
+import Router from 'vue-router'
+Vue.use(Router);
+var router = new Router();
+import SignIn from './SigninButton.vue'
 export default {
   name: "login",
+  components: {
+    'g-signin-button': SignIn
+  },
   data() {
     return {
-      matriculation: "",
-      password: "",
-      type_user: ""
+      token: ""
     };
   },
   methods: {
-    setMatriculation(value) {
-      this.matricula = value;
+    setToken(value) {
+      this.token = value;
     },
-    setPassword(value) {
-      this.password = value;
+    validateDomain(email) {
+      const regularExpression = /@ccc.ufcg.edu.br/;
+      return regularExpression.exec(email) != null;
     },
-    setTypeUser(value) {
-      this.type_user = value;
+    onSignIn(response) {
+      var perfil = response.getBasicProfile();
+      var userEmail = perfil.getEmail();
+      if (this.verifyUser(userEmail)) {
+        // muda para rota do usuario 
+        router.push({ path: '/home' })
+        location.reload();
+      }
+      else {
+        router.push({ path: '/404' })
+        location.reload();
+      }
+    },
+    verifyUser(email) { 
+      var emails = [
+        'geovane.silva@ccc.ufcg.edu.br',
+        'vinicius.jorge.silva@ccc.ufcg.edu.br',
+        'hemillainy.santos@ccc.ufcg.edu.br',
+        'cassio.cordeiro@ccc.ufcg.edu.br'
+      ];
+      return emails.indexOf(email) >= 0;
     }
   }
 };
 </script>
-<style scoped>
-.ui.fluid.button {
-	color: #FFFFFF;
-	background-color: #74accb
+
+<style>
+.g-signin2 {
+  width: 100%;
 }
 
-.ui.stacked.segment {
-	border-top: 2px solid #74accb!important
+.g-signin2 > div {
+  margin: 0 auto;
 }
-
 </style>
