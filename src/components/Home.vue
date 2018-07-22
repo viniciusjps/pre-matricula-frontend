@@ -1,21 +1,25 @@
 <template>
-    <div id="home">
-        <navbar></navbar>
-    </div>
+  <div id="home">
+    <navbar></navbar>
+		<disciplines></disciplines>
+  </div>
 </template>
 
 <script>
 import Navbar from './Navbar.vue'
-export default {
-    name: 'home',
-    components: {
-        'navbar': Navbar
-        },
-    data(){
-        return {
+import Disciplines from './Disciplines.vue';
 
-        }
+export default {
+  name: 'home',
+  components: {
+    'navbar': Navbar,
+		'disciplines': Disciplines
+  },
+  data () {
+    return {
+
     }
+  }
 }
 </script>
 
