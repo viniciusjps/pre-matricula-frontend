@@ -1,13 +1,12 @@
 <template>
 	<div>
-		<br><br><br><br> 
-		<br><br><br><br>
-		<div id="logo-ccc" class="ui middle aligned center aligned grid">
-			<img src="http://www.dsc.ufcg.edu.br/~sacc/img/logo-topo2.png">		
+		<br><br><br><br><br>
+		<div class="ui middle aligned center aligned grid">
+			<img class="logo" src="./src/images/logo.png">		
 		</div>
 		<div id="google-signin-btn">
 			<br><br><br><br> 
-			<br><br><br><br>
+			<br><br>
 			<g-signin-button @done="onSignIn"/>
 		</div>
 	</div>
@@ -71,4 +70,10 @@ export default {
 .g-signin2 > div {
   margin: 0 auto;
 }
+
+img.logo {
+  width: auto;
+  height: 200px;
+}
+
 </style>
