@@ -4,76 +4,63 @@
 		<div class="ui middle aligned center aligned grid">
 			<img class="logo" src="./src/images/logo.png">		
 		</div>
-		<div id="google-signin-btn">
-			<br><br><br><br> 
-			<br><br>
-			<g-signin-button @done="onSignIn"/>
-		</div>
+		<g-signin-button
+      :params="googleSignInParams"
+      @success="onSignInSuccess"
+      @error="onSignInError">
+      Entrar com Google
+  </g-signin-button>
 	</div>
 </template>
 
 <script>
+
+import GSignInButton from 'vue-google-signin-button'
+
 import Vue from 'vue'
 import Router from 'vue-router'
 import SignIn from './SigninButton.vue'
 
 Vue.use(Router);
 var router = new Router();
+Vue.use(GSignInButton)
 
 export default {
-  name: "login",
-  components: {
-    'g-signin-button': SignIn
-  },
-  data() {
+  data () {
     return {
-      token: ""
-    };
+      /**
+       * The Auth2 parameters, as seen on
+       * https://developers.google.com/identity/sign-in/web/reference#gapiauth2initparams.
+       * As the very least, a valid client_id must present.
+       * @type {Object}
+       */
+      googleSignInParams: {
+        client_id: '425992078532-o6usuafa3rganc10vkkae4oe4othp51j.apps.googleusercontent.com'
+      }
+    }
   },
   methods: {
-    setToken(value) {
-      this.token = value;
+    onSignInSuccess (googleUser) {
+      // `googleUser` is the GoogleUser object that represents the just-signed-in user.
+      // See https://developers.google.com/identity/sign-in/web/reference#users
+      const profile = googleUser.getBasicProfile() // etc etc
     },
-    validateDomain(email) {
-      const regularExpression = /@ccc.ufcg.edu.br/;
-      return regularExpression.exec(email) != null;
-    },
-    onSignIn(response) {
-      var profile = response.getBasicProfile();
-      var userEmail = profile.getEmail();
-      if (this.verifyUser(userEmail)) {
-        router.push({ path: '/home' })
-        location.reload();
-      } else {
-        router.push({ path: '/404' })
-        location.reload();
-      };
-    },
-    verifyUser(email) { 
-      var emails = [
-        'geovane.silva@ccc.ufcg.edu.br',
-        'vinicius.jorge.silva@ccc.ufcg.edu.br',
-        'hemillainy.santos@ccc.ufcg.edu.br',
-        'cassio.cordeiro@ccc.ufcg.edu.br'
-      ];
-      return emails.indexOf(email) >= 0;
+    onSignInError (error) {
+      // `error` contains any error occurred.
+      console.log('OH NOES', error)
     }
   }
-};
+}
 </script>
 
 <style>
-.g-signin2 {
-  width: 100%;
+.g-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: #3c82f7;
+  color: #fff;
+  box-shadow: 0 3px 0 #0f69ff;
 }
-
-.g-signin2 > div {
-  margin: 0 auto;
-}
-
-img.logo {
-  width: auto;
-  height: 200px;
-}
-
 </style>
