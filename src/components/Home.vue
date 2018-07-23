@@ -1,7 +1,6 @@
 <template>
   <div id="home">
     <navbar></navbar>
-		<disciplines></disciplines>
   </div>
 </template>
 

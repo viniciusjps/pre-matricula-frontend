@@ -2,21 +2,17 @@
 	<div id="navbar">
 		<div>
 			<div class="ui secondary pointing menu">
-				<a class="active item">
+				<a class="item">
 					<i class="home icon"></i>
-					Home
+					<router-link to="/home" active-class="active">Home</router-link>
 				</a>
 				<a class="item">
 					<i class="th icon"></i>
-					Disciplinas
-				</a>
-				<a class="item">
-					<i class="tasks icon"></i>
-					Realizar Matrícula
+					<router-link to="/disciplinas" active-class="active">Disciplinas</router-link>
 				</a>
 				<div class="right menu">
 					<a class="ui item" @click="signOut()">
-						Logout
+						<router-link to="/" active-class="active">Sair</router-link>
 					</a>
 				</div>
 			</div>

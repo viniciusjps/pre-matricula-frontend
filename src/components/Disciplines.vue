@@ -1,10 +1,13 @@
 <template>
-	<div id="disciplines" class="ui container">
+	<div id="disciplines">
+	<navbar></navbar>
+	<div class="ui container">
 		<div class="ui two column very relaxed stackable grid">
 			<div class="four wide column">
-				<br><br>
+				<br>
+				<h4>Curriculo</h4>
 				<div class="ui vertical menu">
-					<a class="item active" @click="getEnrollments('http://analytics.ufcg.edu.br/pre/ciencia_da_computacao_i_cg/disciplinas'); setGradeType('grade_nova');">Grade Nova</a>
+					<a class="item" @click="getEnrollments('http://analytics.ufcg.edu.br/pre/ciencia_da_computacao_i_cg/disciplinas'); setGradeType('grade_nova');">Grade Nova</a>
 					<a class="item" @click="getEnrollments('http://analytics.ufcg.edu.br/pre/ciencia_da_computacao_d_cg/disciplinas'); setGradeType('grade_antiga');">Grade Antiga</a>
 				</div>
 			</div>
@@ -49,11 +52,17 @@
 			</div>
 		</div>
 	</div>
+	</div>
 </template>
 
 <script>
+import Navbar from './Navbar.vue'
+
 export default {
 	name: 'disciplines',
+	components: {
+    'navbar': Navbar
+  },
 	data () {
 		return {
 			enrollments: [{ disciplina: 'Carregando disciplinas ...' }],
