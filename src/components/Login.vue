@@ -19,7 +19,6 @@ import GSignInButton from 'vue-google-signin-button'
 
 import Vue from 'vue'
 import Router from 'vue-router'
-import SignIn from './SigninButton.vue'
 
 Vue.use(Router);
 var router = new Router();
