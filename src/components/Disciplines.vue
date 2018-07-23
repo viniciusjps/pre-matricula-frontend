@@ -1,9 +1,9 @@
 <template>
 	<div id="disciplines" class="ui container">
 		<br>
-		<div class="ui grid">
+		<div class="ui two column very relaxed stackable grid">
 			<div class="four wide column">
-				<div class="ui vertical pointing menu">
+				<div class="ui vertical menu">
 					<a class="item active" @click="getEnrollments('http://analytics.ufcg.edu.br/pre/ciencia_da_computacao_i_cg/disciplinas'); setActive()">Grade Nova</a>
 					<a class="item" @click="getEnrollments('http://analytics.ufcg.edu.br/pre/ciencia_da_computacao_d_cg/disciplinas'); setActive()">Grade Antiga</a>
 				</div>
@@ -14,13 +14,13 @@
 						<div class="ui segment">
 							<h5> {{ item.disciplina }} </h5>
 						</div>
-						<div class="ui grey secondary inverted segment">
+						<div class="ui grey secondary inverted center aligned segment">
 							<h5>{{ item.semestre }}</h5>
 						</div>
-						<div class="ui blue tertiary inverted segment" v-if="item.tipo == 'Obrigatória'">
+						<div class="ui blue tertiary inverted center aligned segment" v-if="item.tipo == 'Obrigatória'">
 							<h5>{{ item.tipo }}</h5>
 						</div>
-						<div class="ui yellow tertiary inverted segment" v-else>
+						<div class="ui yellow tertiary inverted center aligned segment" v-else>
 							<h5>{{ item.tipo }}</h5>
 						</div>
 					</div>
@@ -62,5 +62,22 @@ export default {
 </script>
 
 <style scoped>
+
+.ui.segment {
+	width: 65%;
+}
+
+.ui.grey.secondary.inverted.segment {
+	width: 5%;
+}
+
+.ui.blue.tertiary.inverted.segment {
+	width: 15%;
+}
+
+.ui.yellow.tertiary.inverted.segment {
+	width: 15%;
+}
+
 
 </style>
