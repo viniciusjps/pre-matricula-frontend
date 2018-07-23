@@ -44,6 +44,7 @@ export default {
       // `googleUser` is the GoogleUser object that represents the just-signed-in user.
       // See https://developers.google.com/identity/sign-in/web/reference#users
       const profile = googleUser.getBasicProfile() // etc etc
+      this.$router.push('/home');
     },
     onSignInError (error) {
       // `error` contains any error occurred.
