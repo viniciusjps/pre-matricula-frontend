@@ -9,18 +9,20 @@
 				</div>
 			</div>
 			<div class="twelve wide column">
-				<div class="ui horizontal segments" v-for="(item, index) in enrollments" :key="index">
-					<div class="ui segment">
-						<h5> {{ item.disciplina }} </h5>
-					</div>
-					<div class="ui grey secondary inverted segment">
-						<h5>{{ item.semestre }}</h5>
-					</div>
-					<div class="ui blue tertiary inverted segment" v-if="item.tipo == 'Obrigatória'">
-						<h5>{{ item.tipo }}</h5>
-					</div>
-					<div class="ui yellow tertiary inverted segment" v-else>
-						<h5>{{ item.tipo }}</h5>
+				<div class="ui segments">
+					<div class="ui horizontal segments" v-for="(item, index) in enrollments" :key="index">
+						<div class="ui segment">
+							<h5> {{ item.disciplina }} </h5>
+						</div>
+						<div class="ui grey secondary inverted segment">
+							<h5>{{ item.semestre }}</h5>
+						</div>
+						<div class="ui blue tertiary inverted segment" v-if="item.tipo == 'Obrigatória'">
+							<h5>{{ item.tipo }}</h5>
+						</div>
+						<div class="ui yellow tertiary inverted segment" v-else>
+							<h5>{{ item.tipo }}</h5>
+						</div>
 					</div>
 				</div>
 			</div>
