@@ -4,12 +4,14 @@
 		<div class="ui middle aligned center aligned grid">
 			<img class="logo" src="./src/images/logo.png">		
 		</div>
-		<g-signin-button
-      :params="googleSignInParams"
-      @success="onSignInSuccess"
-      @error="onSignInError">
-      Entrar com Google
-  </g-signin-button>
+    <div class="ui middle aligned center aligned grid">
+      <g-signin-button
+        :params="googleSignInParams"
+        @success="onSignInSuccess"
+        @error="onSignInError">
+        Entrar com Google
+      </g-signin-button>
+    </div>
 	</div>
 </template>
 
@@ -54,8 +56,8 @@ export default {
 </script>
 
 <style>
+
 .g-signin-button {
-  /* This is where you control how the button looks. Be creative! */
   display: inline-block;
   padding: 4px 8px;
   border-radius: 3px;
@@ -63,4 +65,10 @@ export default {
   color: #fff;
   box-shadow: 0 3px 0 #0f69ff;
 }
+
+img.logo {
+  width: auto;
+  height: 200px;
+}
+
 </style>
