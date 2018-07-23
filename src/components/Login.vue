@@ -5,11 +5,14 @@
 			<img class="logo" src="./src/images/logo.png">		
 		</div>
     <div class="ui middle aligned center aligned grid">
+      <br><br>
       <g-signin-button
         :params="googleSignInParams"
         @success="onSignInSuccess"
         @error="onSignInError">
-        Entrar com Google
+        <i class="google icon"></i>
+        <!--img id="google" src="https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png"-->
+        &nbsp; &nbsp; Entrar com o Google
       </g-signin-button>
     </div>
 	</div>
@@ -58,17 +61,37 @@ export default {
 <style>
 
 .g-signin-button {
+  width: 200px;
+  outline: none;
   display: inline-block;
   padding: 4px 8px;
-  border-radius: 3px;
+  border-radius: 5px;
+  border: 2px solid #f5f5f5;
+  background-color: #f5f5f5;
+  color: rgb(119, 119, 119);
+  box-shadow: 0px 5px 4px #c6c6c6;
+  margin: 0px 0 5px 0;  
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.g-signin-button:hover {
   background-color: #3c82f7;
+  border: 2px solid #3c82f7;
+  box-shadow: 0px 5px 4px #0d54ce;
   color: #fff;
-  box-shadow: 0 3px 0 #0f69ff;
+}
+
+#google {
+  width: 20px;
 }
 
 img.logo {
   width: auto;
-  height: 200px;
+  height: 250px;
 }
+
 
 </style>
