@@ -15,7 +15,7 @@
 					Realizar Matrícula
 				</a>
 				<div class="right menu">
-					<a class="ui item" @click="signOut">
+					<a class="ui item" @click="signOut()">
 						Logout
 					</a>
 				</div>
@@ -25,29 +25,29 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from "vue";
+import Router from "vue-router";
 
 Vue.use(Router);
 var router = new Router();
 
 export default {
-    name: 'navbar',
-    data() {
-        return {
-
-        }
-    },
-    methods: {
-        signOut() {
-            var user = gapi.auth2.getAuthInstance();
-            user.signOut().then(function () {
-                console.log(user.currentUser.Ab.w3)
-            });
-        }
+  name: "navbar",
+  data() {
+    return {};
+  },
+  methods: {
+    signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function() {
+        console.log("User signed out.");
+      }).then(a => {this.$router.push("/");});
     }
-}    
+  }
+};
 </script>
+
+
 
 <style scoped>
 </style>
