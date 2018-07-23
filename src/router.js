@@ -5,6 +5,7 @@ import Navbar from './components/Navbar.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
 import notFound from './components/NotFound.vue'
+import Disciplines from './components/Disciplines.vue'
 
 Vue.use(Router);
 
@@ -29,6 +30,11 @@ export default new Router({
             path: '/404',
             name: 'notFound',
             component: notFound
+        },
+        {
+            path: '/disciplinas',
+            name: 'disciplines',
+            component: Disciplines
         } 
     ]
 })
