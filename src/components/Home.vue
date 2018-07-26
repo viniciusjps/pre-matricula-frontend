@@ -1,42 +1,56 @@
 <template>
-  <div id="home">
-    <navbar></navbar>
-    <br>
-    <div class="ui container">
-      <div class="ui grid">
-        <div class="ten wide column">
-        </div>
-        <div class="six wide column">
-          
-        </div>
-      </div>
-    </div>
-  </div>
+	<div id="home">
+		<navbar></navbar>
+		<br>
+		<div class="ui container">
+			<br>
+			<div class="ui grid">
+				<div class="six wide column">
+					<div>
+						<h2 class="ui header">
+							<img class="ui massive circular image" :src="userUrlImage">
+							<div class="content">
+								Nome do usuario
+								<div class="sub header">
+									Matricula
+								</div>
+							</div>
+						</h2>
+					</div>
+				</div>
+				<div class="ten wide column">
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
 import Navbar from './Navbar.vue'
-import Disciplines from './Disciplines.vue';
 
 export default {
   name: 'home',
   components: {
-    'navbar': Navbar,
-		'disciplines': Disciplines
+    'navbar': Navbar
   },
   data () {
     return {
-      user_image: ''
+      userUrlImage: '',
+      profile: {
 
+      }
     }
+  },
+  created() {
+    this.getImageUrl();
   },
   methods: {
     getImageUrl() {
-      var user_image_url = gapi.auth2.getAuthInstance().currentUser.Ab.w3.Paa;
-      this.setUserImage(user_image_url);
+      var url = gapi.auth2.getAuthInstance().currentUser.Ab.w3.Paa;
+      this.setUserImage(url);
     },
     setUserImage(value) {
-      this.user_image = value;
+      this.userUrlImage = value;
     }
   }
 }
