@@ -5,21 +5,20 @@
 			<div class="ui two column very relaxed stackable grid">
 				<div class="four wide column">
 					<br>
-					<h4>Curriculo</h4>
-					<div class="ui vertical menu">
-						<a class="item" @click="getEnrollments('http://analytics.ufcg.edu.br/pre/ciencia_da_computacao_i_cg/disciplinas'); setGradeType('grade_nova');">Grade Nova</a>
-						<a class="item" @click="getEnrollments('http://analytics.ufcg.edu.br/pre/ciencia_da_computacao_d_cg/disciplinas'); setGradeType('grade_antiga');">Grade Antiga</a>
+					<div class="ui segments">
+						<div class="ui blue secondary segment">
+							<h4 class="ui center aligned header">Nº de créditos selecionados</h4>
+							<h5 class="ui center aligned header"> 5 </h5>
+						</div>
+						<div class="ui segment">
+							<h4 class="ui center aligned header">Nº de disciplinas selecionadas</h4>
+							<h5 class="ui center aligned header"> 5 </h5>
+						</div>
 					</div>
 				</div>
 				<div class="twelve wide column">
 					<br>
-					<div class="ui loading inverted grey tertiary segment" v-if="type == ''">
-						<p>&nbsp;</p>
-						<p>&nbsp;</p>
-						<p>&nbsp;</p>
-						<p>&nbsp;</p>
-					</div>
-					<div v-else>
+					<div>
 						<table class="ui table">
 							<thead>
 								<tr>
@@ -34,24 +33,24 @@
 								<tr class="" v-for="(item, index) in enrollments" :key="index">
 									<td class="center aligned">
 										<div class="ui checkbox">
-											<input type="checkbox" name="item.codigo_disciplina">
+											<input type="checkbox" name="item.code">
 											<label></label>
 										</div>
 										<td>
-											<h5 class="ui left header"> {{ item.disciplina }} </h5>
+											<h5 class="ui left header"> {{ item.name || '-' }} </h5>
 										</td>
 									</td>
 									<td>
-										<h5 class="ui center aligned header"> {{ item.creditos || '-' }} </h5>
+										<h5 class="ui center aligned header"> {{ item.credits || '-' }} </h5>
 									</td>
 									<td id="semestre">
-										<h5 class="ui center aligned inverted header"> {{ item.semestre || '-' }} </h5>
+										<h5 class="ui center aligned inverted header"> {{ item.period || '-' }} </h5>
 									</td>
-									<td id="tipo_obrigatoria" v-if="item.tipo == 'Obrigatória'">
-										<h5 class="ui center aligned inverted header"> {{ item.tipo }} </h5>
+									<td id="tipo_obrigatoria" v-if="item.type == 'Obrigatória'">
+										<h5 class="ui center aligned inverted header"> {{ item.type || '-' }} </h5>
 									</td>
 									<td id="tipo_optativa" v-else>
-										<h5 class="ui center aligned inverted header"> {{ item.tipo }} </h5>
+										<h5 class="ui center aligned inverted header"> {{ item.type || '-' }} </h5>
 									</td>
 								</tr>
 							</tbody>
@@ -76,14 +75,13 @@ export default {
   },
   data() {
     return {
-      enrollments: [{ disciplina: "Carregando disciplinas ..." }],
-      type: ""
+      enrollments: [{ name: "Carregando disciplinas ..." }]
     };
-  },
+	},
+	created () {
+		this.getEnrollments("http://sistema-pre-matricula-back.herokuapp.com/curricularComponent/")
+	},
   methods: {
-    setGradeType(value) {
-      this.type = value;
-    },
     updateDisciplines(link) {
       return fetch(link).then(res => res.json());
     },
@@ -94,9 +92,9 @@ export default {
         })
         .then(a => {
           this.enrollments = this.enrollments.sort(
-            (x, y) => x.semestre - y.semestre
+            (x, y) => x.period - y.period
           );
-        });
+      	});
     }
   }
 };
