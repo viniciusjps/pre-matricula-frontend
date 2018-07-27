@@ -79,7 +79,7 @@ export default {
     };
 	},
 	created () {
-		this.getEnrollments("http://sistema-pre-matricula-back.herokuapp.com/curricularComponent/")
+		this.getEnrollments("http://api-sistema-pre-matricula.herokuapp.com/curricularComponent/")
 	},
   methods: {
     updateDisciplines(link) {
