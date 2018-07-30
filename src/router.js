@@ -35,6 +35,6 @@ export default new Router({
             path: '/disciplinas',
             name: 'disciplines',
             component: Disciplines
-        } 
+        }
     ]
 })

@@ -2,7 +2,7 @@
 	<div>
 		<br><br><br><br><br>
 		<div class="ui middle aligned center aligned grid">
-			<img class="logo" src="./src/images/logo.png">		
+			<img class="logo" src="https://i.imgur.com/qOSejI1.png">		
 		</div>
     <div class="ui middle aligned center aligned grid">
       <br><br>
@@ -19,15 +19,15 @@
 </template>
 
 <script>
+import GSignInButton from 'vue-google-signin-button';
+import Vue from 'vue';
+import Router from 'vue-router';
 
-import GSignInButton from 'vue-google-signin-button'
-
-import Vue from 'vue'
-import Router from 'vue-router'
+import Service from './../Service.vue';
 
 Vue.use(Router);
 var router = new Router();
-Vue.use(GSignInButton)
+Vue.use(GSignInButton);
 
 export default {
   data () {
@@ -45,14 +45,18 @@ export default {
   },
   methods: {
     onSignInSuccess (googleUser) {
-      // `googleUser` is the GoogleUser object that represents the just-signed-in user.
-      // See https://developers.google.com/identity/sign-in/web/reference#users
-      const profile = googleUser.getBasicProfile() // etc etc
+      const profile = googleUser.getBasicProfile();
+      Service.methods.loggin(profile);
       this.$router.push('/home');
     },
     onSignInError (error) {
-      // `error` contains any error occurred.
-      console.log('OH NOES', error)
+      console.log('OH NOES', error);
+    },
+    getUser(link_email) {
+      return fetch(link).then(res => res.json());
+    },
+    checkExists(email) {
+      this.getUser(email);
     }
   }
 }
