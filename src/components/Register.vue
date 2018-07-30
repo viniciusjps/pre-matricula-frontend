@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<br>
-					<button class="ui fluid button" @click="setEnrollment()">
+					<button class="ui fluid button" @click="registerUser()">
 						Entrar
 					</button>
 				</div>
@@ -56,17 +56,34 @@ export default {
     this.email = Service.methods.getEmail();
   },
   methods: {
-    setEnrollment() {
-      Service.methods.setEnrollment(this.enrollment);
-      this.$router.push("/home");
+    registerUser() {
+			Service.methods.setEnrollment(this.enrollment);
+			this.addNewUser()
+				.then(data => {
+					this.$router.push("/home");
+				});
+    },
+    addNewUser() {
+      return fetch("http://api-sistema-pre-matricula.herokuapp.com/api/user", {
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify({
+          enrollment: Service.methods.getEnrollment(),
+          name: Service.methods.getName(),
+          email: Service.methods.getEmail()
+        })
+      });
     }
   }
 };
 </script>
 <style scoped>
 .ui.label {
-	color: #ffffff;
-	background-color: #74accb;
+  color: #ffffff;
+  background-color: #74accb;
 }
 
 .ui.fluid.button {
