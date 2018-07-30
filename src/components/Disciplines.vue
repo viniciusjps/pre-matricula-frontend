@@ -34,15 +34,15 @@
 								<tr class="" v-for="(item, index) in enrollments" :key="index">
 									<td class="center aligned">
 										<div class="ui checkbox">
-											<input type="checkbox" :id="item.code" :value="item.code" @click="selectEnrollment(item.code)">
+											<input type="checkbox" :id="item.code" :value="item.code" v-model="selectedEnrollments">
 											<label></label>
 										</div>
 										<td>
 											<h5 class="ui left header"> {{ item.name || '-' }} </h5>
 										</td>
 									</td>
-									<td>
-										<h5 class="ui center aligned header"> {{ item.credits || '-' }} </h5>
+									<td id="creditos">
+										<h5 class="ui center inverted aligned header"> {{ item.credits || '-' }} </h5>
 									</td>
 									<td id="semestre">
 										<h5 class="ui center aligned inverted header"> {{ item.period || '-' }} </h5>
@@ -82,11 +82,6 @@ export default {
 		this.getEnrollments("http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/")
 	},
   methods: {
-		selectEnrollment(value) {
-			if (!this.selectedEnrollments.includes(value)) {
-				this.selectedEnrollments.push(value);
-			}
-		},
     updateDisciplines(link) {
       return fetch(link).then(res => res.json());
     },
@@ -116,6 +111,10 @@ export default {
 
 #semestre {
   background-color: #919191;
+}
+
+#creditos {
+  background-color: #c2c2c2;
 }
 
 #check_box {
