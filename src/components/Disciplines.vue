@@ -15,7 +15,7 @@
 							<h5 class="ui center aligned header"> {{ selectedEnrollments.length || 0 }} </h5>
 						</div>
 					</div>
-					<button class="ui blue fluid button">Realizar pré matrícula</button>
+					<button class="ui blue fluid button" @click="setAllocation()">Realizar pré matrícula</button>
 				</div>
 				<div class="twelve wide column">
 					<br>
@@ -65,6 +65,7 @@
 
 <script>
 import Navbar from "./Navbar.vue";
+import Service from "./../Service.vue";
 
 export default {
   name: "disciplines",
@@ -74,13 +75,17 @@ export default {
   data() {
     return {
       enrollments: [{ name: "Carregando disciplinas ..." }],
-			selectedEnrollments: [],
-			creditsSelected: 0
+      selectedEnrollments: [],
+      creditsSelected: 0,
+      studentEnrollment: ""
     };
-	},
-	created () {
-		this.getEnrollments("http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/")
-	},
+  },
+  created() {
+    this.getEnrollments(
+      "http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/"
+    );
+    this.setStudentEnrollment();
+  },
   methods: {
     updateDisciplines(link) {
       return fetch(link).then(res => res.json());
@@ -94,7 +99,36 @@ export default {
           this.enrollments = this.enrollments.sort(
             (x, y) => x.period - y.period
           );
-      	});
+        });
+    },
+    setStudentEnrollment() {
+      this.studentEnrollment = Service.methods.getEnrollment();
+    },
+    setAllocation() {
+      let disciplines = [];
+      for (let index = 0; index < this.selectedEnrollments.length; index++) {
+        const element = this.selectedEnrollments[index];
+        disciplines.push({
+          studentEnrollment: this.studentEnrollment,
+          disciplineCode: element
+        });
+      }
+      this.doAllocation(disciplines).then(data => {
+        this.$router.push("/home");
+      });
+    },
+    doAllocation(data) {
+      return fetch(
+        "http://api-sistema-pre-matricula.herokuapp.com/api/allocation",
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify(data)
+        }
+      );
     }
   }
 };
