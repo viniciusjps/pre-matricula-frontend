@@ -46,24 +46,34 @@ export default {
   methods: {
     onSignInSuccess (googleUser) {
       const profile = googleUser.getBasicProfile();
-      Service.methods.loggin(profile);
-      this.$router.push('/home');
+
+      let enrollment = '';
+      this.getEnrollmentByEmail(profile.getEmail())
+        .then(data => {
+          enrollment = data.enrollment;
+        });
+
+      if (!enrollment) {
+        this.$router.push('/register');
+        Service.methods.loggin(profile);
+      } else {
+        this.$router.push('/home');
+      }
     },
     onSignInError (error) {
       console.log('OH NOES', error);
     },
-    getUser(link_email) {
-      return fetch(link).then(res => res.json());
+    getUserByEmail(link_email) {
+      return fetch(link_email).then(res => res.json());
     },
-    checkExists(email) {
-      this.getUser(email);
-    }
+    getEnrollmentByEmail(email) {
+      return this.getUserByEmail(email);
+    },
   }
 }
 </script>
 
 <style>
-
 .g-signin-button {
   width: 200px;
   outline: none;
@@ -96,6 +106,5 @@ img.logo {
   width: auto;
   height: 250px;
 }
-
 
 </style>

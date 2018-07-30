@@ -20,6 +20,9 @@ export default {
     getEmail() {
       return this.email
     },
+    setEnrollment(value) {
+      this.enrollment = value;
+    },
     getEnrollment() {
       return this.enrollment
     },
