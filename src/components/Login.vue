@@ -64,7 +64,7 @@ export default {
       console.log('OH NOES', error);
     },
     getUserByEmail(link_email) {
-      return fetch(link_email).then(res => res.json());
+      return fetch('http://api-sistema-pre-matricula.herokuapp.com/api/user/' + link_email).then(res => res.json());
     },
     getEnrollmentByEmail(email) {
       return this.getUserByEmail(email);

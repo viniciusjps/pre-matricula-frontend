@@ -8,13 +8,14 @@
 					<div class="ui segments">
 						<div class="ui blue secondary segment">
 							<h4 class="ui center aligned header">Nº de créditos selecionados</h4>
-							<h5 class="ui center aligned header"> 5 </h5>
+							<h5 class="ui center aligned header"> {{ creditsSelected }} </h5>
 						</div>
 						<div class="ui segment">
 							<h4 class="ui center aligned header">Nº de disciplinas selecionadas</h4>
-							<h5 class="ui center aligned header"> 5 </h5>
+							<h5 class="ui center aligned header"> {{ selectedEnrollments.length || 0 }} </h5>
 						</div>
 					</div>
+					<button class="ui blue fluid button">Realizar pré matrícula</button>
 				</div>
 				<div class="twelve wide column">
 					<br>
@@ -33,7 +34,7 @@
 								<tr class="" v-for="(item, index) in enrollments" :key="index">
 									<td class="center aligned">
 										<div class="ui checkbox">
-											<input type="checkbox" name="item.code">
+											<input type="checkbox" :id="item.code" :value="item.code" @click="selectEnrollment(item.code)">
 											<label></label>
 										</div>
 										<td>
@@ -55,9 +56,6 @@
 								</tr>
 							</tbody>
 						</table>
-						<br>
-						<button class="ui blue fluid button">Realizar pré matrícula</button>
-						<br>
 					</div>
 				</div>
 			</div>
@@ -75,13 +73,20 @@ export default {
   },
   data() {
     return {
-      enrollments: [{ name: "Carregando disciplinas ..." }]
+      enrollments: [{ name: "Carregando disciplinas ..." }],
+			selectedEnrollments: [],
+			creditsSelected: 0
     };
 	},
 	created () {
-		this.getEnrollments("http://api-sistema-pre-matricula.herokuapp.com/curricularComponent/")
+		this.getEnrollments("http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/")
 	},
   methods: {
+		selectEnrollment(value) {
+			if (!this.selectedEnrollments.includes(value)) {
+				this.selectedEnrollments.push(value);
+			}
+		},
     updateDisciplines(link) {
       return fetch(link).then(res => res.json());
     },
