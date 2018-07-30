@@ -1,11 +1,11 @@
 <template>
 	<div id="register" class="ui middle aligned center aligned grid">
 		<div class="column" style="max-width: 450px">
-			<br><br><br><br><br><br><br>
+			<br><br><br><br><br>
 			<h2 class="ui grey image header">
 				<i class="user icon"></i>
 				<div class="content">
-					Complete seu cadastro
+					Primeiro acesso
 				</div>
 				<br>
 			</h2>
@@ -40,35 +40,40 @@
 </template>
 
 <script>
-import Service from './../Service.vue';
+import Service from "./../Service.vue";
 
 export default {
   name: "register",
   data() {
     return {
-			enrollment:'',
-			name: '',
-			email: ''
-		};
+      enrollment: "",
+      name: "",
+      email: ""
+    };
   },
-	created() {
-		this.name = Service.methods.getName();
-		this.email = Service.methods.getEmail();
-	},
+  created() {
+    this.name = Service.methods.getName();
+    this.email = Service.methods.getEmail();
+  },
   methods: {
     setEnrollment() {
-			Service.methods.setEnrollment(this.enrollment);
-			this.$router.push('/home');
-		}
+      Service.methods.setEnrollment(this.enrollment);
+      this.$router.push("/home");
+    }
   }
 };
 </script>
 <style scoped>
+.ui.label {
+	color: #ffffff;
+	background-color: #74accb;
+}
+
 .ui.fluid.button {
-	color: #FFFFFF;
-	background-color: #74accb
+  color: #ffffff;
+  background-color: #74accb;
 }
 .ui.stacked.segment {
-	border-top: 2px solid #74accb!important
+  border-top: 2px solid #74accb !important;
 }
 </style>
