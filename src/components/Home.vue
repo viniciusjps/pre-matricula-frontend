@@ -7,18 +7,15 @@
 			<div class="ui two column very relaxed stackable grid">
 				<div class="six wide column">
 					<div>
-						<div class="ui middle aligned center aligned grid">
-							<img class="logo" src="https://i.imgur.com/qOSejI1.png">		
-						</div>
-					</div>
-					<hr>
-					<div>
 						<img class="ui centered align circular image" :src="userUrlImage">
 						<h2 class="ui centered header">
 							<div class="content">
 								{{ profile.name }}
 								<div class="sub header">
 									{{ profile.email }}
+								</div>
+                <div class="sub header">
+									{{ profile.enrollment }}
 								</div>
 							</div>
 						</h2>
@@ -39,7 +36,7 @@
                 </h5>
 							</div>
 						</div>
-						<button class="ui fluid button">Consultar Pré Matricula</button>
+						<consultenrollment></consultenrollment>
 						<br>
 						<button class="ui fluid button">Editar Pré Matricula</button>
 						<br>
@@ -53,11 +50,13 @@
 <script>
 import Navbar from "./Navbar.vue";
 import Service from "./../Service.vue";
+import ConsultEnrollment from "./ConsultEnrollment.vue";
 
 export default {
   name: "home",
   components: {
-    navbar: Navbar
+    navbar: Navbar,
+    consultenrollment: ConsultEnrollment
   },
   data() {
     return {
@@ -78,14 +77,15 @@ export default {
     getProfile() {
       var profileData = gapi.auth2.getAuthInstance().currentUser.Ab.w3;
       this.setUserImage(profileData.Paa);
-      this.setProfileData(profileData.ofa, profileData.U3);
+      this.setProfileData();
     },
     setUserImage(value) {
       this.userUrlImage = value;
     },
-    setProfileData(name, email) {
-      this.profile.name = name;
-      this.profile.email = email;
+    setProfileData() {
+      this.profile.name = Service.methods.getName();
+      this.profile.email = Service.methods.getEmail();
+      this.profile.enrollment = Service.methods.getEnrollment();
     },
     setCheckEnrollment(enrollment) {
       this.getAllocationsByEnrollment(enrollment).then(data => {
