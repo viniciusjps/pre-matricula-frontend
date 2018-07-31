@@ -51,14 +51,19 @@ export default {
       this.getEnrollmentByEmail(profile.getEmail())
         .then(data => {
           enrollment = data.enrollment;
+        })
+        .catch(error => {
+          Service.methods.loggin(profile);
+          this.$router.push('/register');
+        })
+        .then(a => {
+            if (!enrollment) {
+                Service.methods.loggin(profile);
+                this.$router.push('/register');
+            } else {
+                this.$router.push('/home');
+            }
         });
-
-      if (!enrollment) {
-        this.$router.push('/register');
-        Service.methods.loggin(profile);
-      } else {
-        this.$router.push('/home');
-      }
     },
     onSignInError (error) {
       console.log('OH NOES', error);

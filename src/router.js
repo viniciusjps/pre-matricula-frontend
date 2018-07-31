@@ -7,6 +7,7 @@ import Register from './components/Register.vue'
 import registerCurricularComponent from './components/RegisterCurricularComponent.vue'
 import notFound from './components/NotFound.vue'
 import Disciplines from './components/Disciplines.vue'
+import ConsultEnrollment from './components/ConsultEnrollment.vue'
 
 Vue.use(Router);
 
@@ -41,6 +42,11 @@ export default new Router({
             path: '/register/curricularComponent',
             name: 'registerCurricularComponent',
             component: registerCurricularComponent
+        },
+        {
+            path: '/curricularComponent',
+            name: 'consultenrollment',
+            component: ConsultEnrollment
         }
     ]
 })

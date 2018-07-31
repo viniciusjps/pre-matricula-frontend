@@ -3,11 +3,10 @@
     <div class="column" style="max-width: 450px">
       <br><br><br><br><br>
       <h2 class="ui grey image header">
-        <i class="user icon"></i>
         <div class="content">
-          Cadastrar Componente Curricular
+          Cadastrar componente curricular
         </div>
-        <br>
+        <br><br>
       </h2>
       <form class="ui larg form">
         <div class="ui stacked segment">
