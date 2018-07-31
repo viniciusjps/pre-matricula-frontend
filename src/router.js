@@ -4,6 +4,7 @@ import Home from './components/Home.vue'
 import Navbar from './components/Navbar.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
+import registerCurricularComponent from './components/RegisterCurricularComponent.vue'
 import notFound from './components/NotFound.vue'
 import Disciplines from './components/Disciplines.vue'
 
@@ -35,6 +36,11 @@ export default new Router({
             path: '/disciplinas',
             name: 'disciplines',
             component: Disciplines
+        },
+        {
+            path: '/register/curricularComponent',
+            name: 'registerCurricularComponent',
+            component: registerCurricularComponent
         }
     ]
 })
