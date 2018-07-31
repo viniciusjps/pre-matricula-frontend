@@ -1,7 +1,7 @@
 <template>
 	<div id="navbar">
 		<div>
-			<div class="ui secondary pointing menu">
+			<div class="ui menu">
 				<router-link to="/home" active-class="active">
 					<a class="item">
 						<i class="home icon"></i>
@@ -16,8 +16,9 @@
 				</router-link>
 				<div class="right menu">
 					<router-link to="/" active-class="active">
-						<a class="ui item" @click="signOut()">
-							Sair
+						<a class="item" @click="signOut()">
+							<i class="sign out icon"></i>
+							Logout
 						</a>
 					</router-link>
 				</div>
@@ -29,6 +30,7 @@
 <script>
 import Vue from "vue";
 import Router from "vue-router";
+import Service from "./../Service.vue";
 
 Vue.use(Router);
 var router = new Router();
@@ -41,15 +43,18 @@ export default {
   methods: {
     signOut() {
       var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function() {
-        console.log("User signed out.");
-      }).then(a => {this.$router.push("/");});
+      auth2
+        .signOut()
+        .then(function() {
+          console.log("User signed out.");
+        })
+        .then(a => {
+          this.$router.push("/");
+        });
     }
   }
 };
 </script>
-
-
 
 <style scoped>
 </style>
