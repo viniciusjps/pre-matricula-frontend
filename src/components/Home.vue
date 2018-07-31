@@ -70,19 +70,13 @@ export default {
     };
   },
   created() {
-    this.getProfile();
+    Service.methods.reloadPage();
+    this.setProfileData();
     this.setCheckEnrollment(Service.methods.getEnrollment());
   },
   methods: {
-    getProfile() {
-      var profileData = gapi.auth2.getAuthInstance().currentUser.Ab.w3;
-      this.setUserImage(profileData.Paa);
-      this.setProfileData();
-    },
-    setUserImage(value) {
-      this.userUrlImage = value;
-    },
     setProfileData() {
+      this.userUrlImage = Service.methods.getUrl();
       this.profile.name = Service.methods.getName();
       this.profile.email = Service.methods.getEmail();
       this.profile.enrollment = Service.methods.getEnrollment();
