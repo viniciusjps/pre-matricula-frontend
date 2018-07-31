@@ -15,7 +15,7 @@
 							<h5 class="ui center aligned header"> {{ selectedEnrollments.length || 0 }} </h5>
 						</div>
 					</div>
-					<button class="ui blue fluid button" @click="setAllocation()">Realizar pré matrícula</button>
+					<button class="ui blue fluid button" :disabled="checkEnrollment" @click="setAllocation()">Realizar pré matrícula</button>
 				</div>
 				<div class="twelve wide column">
 					<br>
@@ -34,7 +34,7 @@
 								<tr class="" v-for="(item, index) in enrollments" :key="index">
 									<td class="center aligned">
 										<div class="ui checkbox">
-											<input type="checkbox" :id="item.code" :value="item.code" v-model="selectedEnrollments">
+											<input type="checkbox" :id="item.code" :change="updateLimits()" :value="item" v-model="selectedEnrollments">
 											<label></label>
 										</div>
 										<td>
@@ -76,8 +76,9 @@ export default {
     return {
       enrollments: [{ name: "Carregando disciplinas ..." }],
       selectedEnrollments: [],
+      studentEnrollment: "",
       creditsSelected: 0,
-      studentEnrollment: ""
+      checkEnrollment: false
     };
   },
   created() {
@@ -129,6 +130,15 @@ export default {
           body: JSON.stringify(data)
         }
       );
+    },
+    updateLimits() {
+      if (this.selectedEnrollments.length > 0) {
+        let index = 0;
+        this.selectedEnrollments.map(a => {index += a.credits});
+        this.creditsSelected = index;
+      } else {
+        this.creditsSelected = 0;
+      }
     }
   }
 };
