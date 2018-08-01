@@ -6,7 +6,11 @@
 				<div class="four wide column">
 					<br>
 					<div class="ui segments">
-						<div class="ui blue secondary segment">
+						<div class="ui red inverted segment" v-if="!checkEnrollment">
+							<h4 class="ui center aligned header">Nº de créditos selecionados</h4>
+							<h5 class="ui center aligned header"> {{ creditsSelected }} </h5>
+						</div>
+            <div class="ui green inverted segment" v-else>
 							<h4 class="ui center aligned header">Nº de créditos selecionados</h4>
 							<h5 class="ui center aligned header"> {{ creditsSelected }} </h5>
 						</div>
@@ -15,7 +19,7 @@
 							<h5 class="ui center aligned header"> {{ selectedEnrollments.length || 0 }} </h5>
 						</div>
 					</div>
-					<button class="ui blue fluid button" :disabled="checkEnrollment" @click="setAllocation()">Realizar pré matrícula</button>
+					<button class="ui blue fluid button" :disabled="!checkEnrollment" @click="setAllocation()">Realizar pré matrícula</button>
 				</div>
 				<div class="twelve wide column">
 					<br>
@@ -38,7 +42,10 @@
 											<label></label>
 										</div>
 										<td>
-											<h5 class="ui left header"> {{ item.name || '-' }} </h5>
+											<h5 class="ui left header"> 
+                        {{ item.name || '-' }} 
+                        <i class="ui label"> {{ item.gridType || '-' }} </i>
+                      </h5>
 										</td>
 									</td>
 									<td id="creditos">
@@ -77,7 +84,7 @@ export default {
       enrollments: [{ name: "Carregando disciplinas ..." }],
       selectedEnrollments: [],
       studentEnrollment: "",
-      creditsSelected: 0,
+      creditsSelected: "",
       checkEnrollment: false
     };
   },
@@ -112,7 +119,7 @@ export default {
         const element = this.selectedEnrollments[index];
         disciplines.push({
           studentEnrollment: this.studentEnrollment,
-          disciplineCode: element
+          disciplineCode: element.code
         });
       }
       this.doAllocation(disciplines).then(data => {
@@ -133,12 +140,18 @@ export default {
       );
     },
     updateLimits() {
-      if (this.selectedEnrollments.length > 0) {
-        let index = 0;
-        this.selectedEnrollments.map(a => {index += a.credits});
-        this.creditsSelected = index;
-      } else {
+      this.checkEnrollment = false;
+      if (this.selectedEnrollments.length == 0) {
         this.creditsSelected = 0;
+      } else {
+        let sum = 0;
+        this.selectedEnrollments.map(a => {
+          sum += a.credits;
+        });
+        this.creditsSelected = sum;
+        if (sum >= 16 && sum <= 24) {
+          this.checkEnrollment = true;
+        }
       }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="login">
 		<br><br><br><br><br>
 		<div class="ui middle aligned center aligned grid">
 			<img class="logo" src="https://i.imgur.com/qOSejI1.png">		
@@ -19,18 +19,19 @@
 </template>
 
 <script>
-import GSignInButton from 'vue-google-signin-button';
-import Vue from 'vue';
-import Router from 'vue-router';
+import GSignInButton from "vue-google-signin-button";
+import Vue from "vue";
+import Router from "vue-router";
 
-import Service from './../Service.vue';
+import Service from "./../Service.vue";
 
 Vue.use(Router);
 var router = new Router();
 Vue.use(GSignInButton);
 
 export default {
-  data () {
+  name: "login",
+  data() {
     return {
       /**
        * The Auth2 parameters, as seen on
@@ -39,43 +40,47 @@ export default {
        * @type {Object}
        */
       googleSignInParams: {
-        client_id: '425992078532-o6usuafa3rganc10vkkae4oe4othp51j.apps.googleusercontent.com'
+        client_id:
+          "425992078532-o6usuafa3rganc10vkkae4oe4othp51j.apps.googleusercontent.com"
       }
-    }
+    };
   },
   methods: {
-    onSignInSuccess (googleUser) {
+    onSignInSuccess(googleUser) {
       const profile = googleUser.getBasicProfile();
 
-      let enrollment = '';
+      let enrollment = "";
       this.getEnrollmentByEmail(profile.getEmail())
         .then(data => {
           enrollment = data.enrollment;
         })
         .catch(error => {
           Service.methods.loggin(profile);
-          this.$router.push('/register');
+          this.$router.push("/register");
         })
         .then(a => {
-            if (!enrollment) {
-                Service.methods.loggin(profile);
-                this.$router.push('/register');
-            } else {
-                this.$router.push('/home');
-            }
+          if (!enrollment) {
+            Service.methods.loggin(profile);
+            this.$router.push("/register");
+          } else {
+            this.$router.push("/home");
+          }
         });
     },
-    onSignInError (error) {
-      console.log('OH NOES', error);
+    onSignInError(error) {
+      console.log("OH NOES", error);
     },
     getUserByEmail(link_email) {
-      return fetch('http://api-sistema-pre-matricula.herokuapp.com/api/user/searchByEmail/' + link_email).then(res => res.json());
+      return fetch(
+        "http://api-sistema-pre-matricula.herokuapp.com/api/user/searchByEmail/" +
+          link_email
+      ).then(res => res.json());
     },
     getEnrollmentByEmail(email) {
       return this.getUserByEmail(email);
-    },
+    }
   }
-}
+};
 </script>
 
 <style>
@@ -89,9 +94,9 @@ export default {
   background-color: #f5f5f5;
   color: rgb(119, 119, 119);
   box-shadow: 0px 5px 4px #c6c6c6;
-  margin: 0px 0 5px 0;  
+  margin: 0px 0 5px 0;
   cursor: pointer;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   text-align: center;
   vertical-align: middle;
 }
@@ -112,4 +117,8 @@ img.logo {
   height: 250px;
 }
 
+#login {
+  background: url("https://i.imgur.com/dJAm5p8.jpg");
+  /*background: url("https://i.imgur.com/A26DD0Q.jpg");*/
+}
 </style>

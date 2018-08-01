@@ -6,47 +6,47 @@
 			<sui-modal-content>
 				<sui-modal-description>
 					<div id="register" class="ui middle aligned center aligned grid">
-						<div class="column" style="max-width: 450px">
+						<div class="column">
 							<form class="ui larg form">
-								<div class="ui stacked segment">
+								<div class="ui segment">
 									<div class="field">
 										<div class="ui labeled icon input">
-											<div class="ui label">Código &nbsp;&nbsp;&nbsp;</div>
-											<input type="text" v-model="code">
+											<div class="ui label">Código &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+											<input type="text" placeholder="Digite o código da disciplina" v-model="code">
 										</div>
 									</div>
 									<div class="field">
 										<div class="ui labeled icon input">
-											<div class="ui label">Nome &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-											<input type="text" v-model="name">
+											<div class="ui label">Nome &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+											<input type="text" v-model="name" placeholder="Digite o nome">
 										</div>
 									</div>
 									<div class="field">
 										<div class="ui labeled icon input">
-											<div class="ui label">Créditos</div>
-											<input type="text" v-model="credits">
+											<div class="ui label">Créditos &nbsp;&nbsp;&nbsp;&nbsp;</div>
+											<input type="text" v-model="credits" placeholder="Digite a quatidade de créditos">
 										</div>
 									</div>
 									<div class="field">
 										<div class="ui labeled icon input">
-											<div class="ui label">Tipo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-											<input type="text" v-model="type">
+											<div class="ui label">Tipo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+											<input type="text" v-model="type" placeholder="Tipo da disciplina">
 										</div>
 									</div>
 									<div class="field">
 										<div class="ui labeled icon input">
-											<div class="ui label">Grade &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-											<input type="text" v-model="gridType">
+											<div class="ui label">Grade &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+											<input type="text" v-model="gridType" placeholder="Digite o tipo de PCC">
 										</div>
 									</div>
 									<div class="field">
 										<div class="ui labeled icon input">
-											<div class="ui label">Periodo &nbsp;</div>
-											<input type="text" v-model="period">
+											<div class="ui label">Semestre &nbsp;</div>
+											<input type="text" v-model="period" placeholder="Digite o semestre da qual faz parte">
 										</div>
 									</div>
 									<br>
-									<button class="ui fluid button" @click="registerDiscipline()">
+									<button id="add" class="ui fluid button" @click="registerDiscipline()">
 										Cadastrar
 									</button>
 								</div>
@@ -74,6 +74,7 @@ export default {
   name: "registerCurricularComponent",
   data() {
     return {
+      open: false,
       code: "",
       name: "",
       credits: "",
@@ -83,6 +84,9 @@ export default {
     };
   },
   methods: {
+    toggle() {
+      this.open = !this.open;
+    },
     registerDiscipline() {
       let data = {
         code: this.code,
@@ -102,11 +106,17 @@ export default {
           method: "POST",
           body: JSON.stringify(data)
         }
-      );
+      ).then(a => {
+				this.toggle();
+			});
     }
   }
 };
 </script>
 
 <style>
+#add {
+  color: #ffffff;
+  background-color: #74accb;
+}
 </style>

@@ -49,7 +49,8 @@ export default {
           console.log("User signed out.");
         })
         .then(a => {
-          this.$router.push("/");
+					this.$router.push("/");
+					Service.methods.loggout();
         });
     }
   }
