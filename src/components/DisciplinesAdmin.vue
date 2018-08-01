@@ -1,21 +1,22 @@
 <template>
-	<div id="disciplines">
-		<navbar></navbar>
+	<div id="disciplines-admin">
+		<navbar-admin></navbar-admin>
 		<div class="ui container">
 			<div class="ui two column very relaxed stackable grid">
 				<div class="four wide column">
 					<br>
 					<div class="ui segments">
 						<div class="ui blue secondary segment">
-							<h4 class="ui center aligned header">Nº de créditos selecionados</h4>
-							<h5 class="ui center aligned header"> {{ creditsSelected }} </h5>
+							<h4 class="ui center aligned header">Nº de solicitações</h4>
+							<h5 class="ui center aligned header">  </h5>
 						</div>
 						<div class="ui segment">
-							<h4 class="ui center aligned header">Nº de disciplinas selecionadas</h4>
-							<h5 class="ui center aligned header"> {{ selectedEnrollments.length || 0 }} </h5>
+							<h4 class="ui center aligned header">Nº de disciplinas cadastradas</h4>
+							<h5 class="ui center aligned header">  </h5>
 						</div>
 					</div>
-					<button class="ui blue fluid button" :disabled="checkEnrollment" @click="setAllocation()">Realizar pré matrícula</button>
+					<button class="ui blue fluid button">Cadastrar disciplina</button>
+					<button class="ui blue fluid button">Editar disciplina</button>
 				</div>
 				<div class="twelve wide column">
 					<br>
@@ -33,10 +34,7 @@
 							<tbody>
 								<tr class="" v-for="(item, index) in enrollments" :key="index">
 									<td class="center aligned">
-										<div class="ui checkbox">
-											<input type="checkbox" :id="item.code" :change="updateLimits()" :value="item" v-model="selectedEnrollments">
-											<label></label>
-										</div>
+										<button class="ui negative button" @click="deleteDiscipline(item.code)">Apagar</button>
 										<td>
 											<h5 class="ui left header"> {{ item.name || '-' }} </h5>
 										</td>
@@ -64,21 +62,19 @@
 </template>
 
 <script>
-import Navbar from "./Navbar.vue";
+import NavbarAdmin from "./NavbarAdmin.vue";
 import Service from "./../Service.vue";
 
 export default {
-  name: "disciplines",
+  name: "disciplines-admin",
   components: {
-    navbar: Navbar
+    navbar: NavbarAdmin
   },
   data() {
     return {
       enrollments: [{ name: "Carregando disciplinas ..." }],
       selectedEnrollments: [],
-      studentEnrollment: "",
-      creditsSelected: 0,
-      checkEnrollment: false
+      studentEnrollment: ""
     };
   },
   created() {
@@ -105,42 +101,10 @@ export default {
     },
     setStudentEnrollment() {
       this.studentEnrollment = Service.methods.getEnrollment();
-    },
-    setAllocation() {
-      let disciplines = [];
-      for (let index = 0; index < this.selectedEnrollments.length; index++) {
-        const element = this.selectedEnrollments[index];
-        disciplines.push({
-          studentEnrollment: this.studentEnrollment,
-          disciplineCode: element
-        });
-      }
-      this.doAllocation(disciplines).then(data => {
-        this.$router.push("/home");
-      });
-    },
-    doAllocation(data) {
-      return fetch(
-        "http://api-sistema-pre-matricula.herokuapp.com/api/allocation",
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          },
-          method: "POST",
-          body: JSON.stringify(data)
-        }
-      );
-    },
-    updateLimits() {
-      if (this.selectedEnrollments.length > 0) {
-        let index = 0;
-        this.selectedEnrollments.map(a => {index += a.credits});
-        this.creditsSelected = index;
-      } else {
-        this.creditsSelected = 0;
-      }
-    }
+		},
+		deleteDiscipline(value) {
+
+		}
   }
 };
 </script>

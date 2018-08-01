@@ -10,7 +10,8 @@ export default {
       return {
         name: '',
         email: '',
-        enrollment: ''
+        enrollment: '',
+        url: ''
       }
   },
   methods: {
@@ -26,10 +27,35 @@ export default {
     getEnrollment() {
       return this.enrollment
     },
-    loggin(profile) {
-        this.name = profile.getName();
-        this.email = profile.getEmail();
+    getUrl() {
+      return this.url;
     },
+
+    loggin(profile) {
+      this.name = profile.getName();
+      this.email = profile.getEmail();
+      this.url = profile.getImageUrl();
+
+      localStorage.setItem("isLogged", true);
+      localStorage.setItem("name", this.name);
+      localStorage.setItem("enrollment", this.enrollment);
+      localStorage.setItem("email", this.email);
+      localStorage.setItem("url", this.url);
+    },
+    loggout() {
+      localStorage.setItem("isLogged", false);
+      localStorage.removeItem("name");
+      localStorage.removeItem("enrollment");
+      localStorage.removeItem("email");
+      localStorage.removeItem("url");
+      location.reload();
+    },
+    reloadPage() {
+      this.name = localStorage.getItem("name");
+      this.enrollment = localStorage.getItem("enrollment");
+      this.email = localStorage.getItem("email");
+      this.url = localStorage.getItem("url");
+    }
   }
 }
 </script>
