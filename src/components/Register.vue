@@ -14,19 +14,19 @@
 					<div class="field">
 						<div class="ui labeled icon input">
 							<div class="ui label">Nome &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-							<input type="text" :value="name" disabled>
+							<input type="text" :value="profile.name" disabled>
 						</div>
 					</div>
 					<div class="field">
 						<div class="ui labeled icon input">
 							<div class="ui label">Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-							<input type="text" :value="email" disabled>
+							<input type="text" :value="profile.email" disabled>
 						</div>
 					</div>
 					<div class="field">
 						<div class="ui labeled icon input">
 							<div class="ui label">Matricula</div>
-							<input type="text" placeholder="Digite sua matricula" v-model="enrollment">
+							<input type="text" placeholder="Digite sua matricula" v-model="profile.enrollment">
 						</div>
 					</div>
 					<br>
@@ -46,18 +46,36 @@ export default {
   name: "register",
   data() {
     return {
-      enrollment: "",
-      name: "",
-      email: ""
+			profile: {
+				enrollment: "",
+      	name: "",
+				email: "",
+				url: "",
+				getName() {
+					return this.name;
+				},
+				getEmail() {
+					return this.email;
+				},
+				getImageUrl() {
+					return this.url;
+				},
+				getEnrollment() {
+					return this.enrollment;
+				}
+			}
     };
   },
   created() {
-    this.name = Service.methods.getName();
-    this.email = Service.methods.getEmail();
+		this.profile.name = Service.methods.getName();
+    this.profile.email = Service.methods.getEmail();
+		Service.methods.reloadPage();
   },
   methods: {
     registerUser() {
-			Service.methods.setEnrollment(this.enrollment);
+			Service.methods.setEnrollment(this.profile.enrollment);
+			this.url = Service.methods.getUrl();
+			Service.methods.loggin(this.profile, this.profile.enrollment);
 			this.addNewUser()
 				.then(data => {
 					this.$router.push("/home");
