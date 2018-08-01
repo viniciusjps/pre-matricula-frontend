@@ -64,6 +64,8 @@ export default {
             this.$router.push("/register");
           } else {
             this.$router.push("/home");
+            Service.methods.loggin(profile);
+            Service.methods.setEnrollment(enrollment);
           }
         });
     },
