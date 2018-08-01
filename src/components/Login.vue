@@ -55,15 +55,16 @@ export default {
           enrollment = data.enrollment;
         })
         .catch(error => {
-          Service.methods.loggin(profile);
+          Service.methods.loggin(profile, enrollment);
           this.$router.push("/register");
         })
         .then(a => {
           if (!enrollment) {
-            Service.methods.loggin(profile);
+            Service.methods.loggin(profile, enrollment);
             this.$router.push("/register");
           } else {
             this.$router.push("/home");
+            Service.methods.loggin(profile, enrollment);
           }
         });
     },

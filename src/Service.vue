@@ -31,14 +31,15 @@ export default {
       return this.url;
     },
 
-    loggin(profile) {
+    loggin(profile, value) {
       this.name = profile.getName();
       this.email = profile.getEmail();
       this.url = profile.getImageUrl();
+      this.enrollment = value;
 
       localStorage.setItem("isLogged", true);
       localStorage.setItem("name", this.name);
-      localStorage.setItem("enrollment", this.enrollment);
+      localStorage.setItem("enrollment", value);
       localStorage.setItem("email", this.email);
       localStorage.setItem("url", this.url);
     },
