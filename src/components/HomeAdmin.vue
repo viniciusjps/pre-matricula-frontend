@@ -14,9 +14,6 @@
 								<div class="sub header">
 									{{ profile.email }}
 								</div>
-								<div class="sub header">
-									{{ profile.enrollment }}
-								</div>
 							</div>
 						</h2>
 					</div>
@@ -29,7 +26,7 @@
 							</div>
 							<div class="ui segment">
 								<h5 class="ui center aligned header">
-									Qtd aqui
+									{{requests}}
 								</h5>
 							</div>
 						</div>
@@ -48,40 +45,51 @@
 </template>
 
 <script>
-import Service from "./../Service.vue";
+import ServiceAdmin from "./../ServiceAdmin.vue";
 import NavbarAdmin from "./NavbarAdmin.vue";
 import ChangePassword from "./ChangePassword.vue";
 import RegisterCurricularComponent from "./RegisterCurricularComponent";
-import SearchAllocation from './SearchAllocation.vue';
+import SearchAllocation from "./SearchAllocation.vue";
+import { request } from 'http';
 
 export default {
   name: "home-admin",
   components: {
     navbar: NavbarAdmin,
-		changepassword: ChangePassword,
-		register: RegisterCurricularComponent,
-		search: SearchAllocation
+    changepassword: ChangePassword,
+    register: RegisterCurricularComponent,
+    search: SearchAllocation
   },
   data() {
     return {
       profile: {
         name: "",
         email: "",
-        enrollment: "",
         url: ""
-      }
+      },
+      requests: ""
     };
   },
   created() {
-    Service.methods.reloadPage();
+    ServiceAdmin.methods.reloadPage();
     this.setProfileData();
+    this.setRequests();
   },
   methods: {
     setProfileData() {
-      this.profile.url = Service.methods.getUrl();
-      this.profile.name = Service.methods.getName();
-      this.profile.email = Service.methods.getEmail();
-      this.profile.enrollment = Service.methods.getEnrollment();
+      this.profile.name = ServiceAdmin.methods.getName();
+      this.profile.email = ServiceAdmin.methods.getEmail();
+      ServiceAdmin.methods.getUrl(this.profile.email).then(json => {
+        this.profile.url = json["entry"]["gphoto$thumbnail"]["$t"];
+      });
+    },
+    setRequests() {
+      fetch("http://api-sistema-pre-matricula.herokuapp.com/api/allocation")
+        .then(d => d.json())
+        .then(a => {
+					this.requests = Object.keys(a).length;
+					localStorage.setItem("requests", this.requests);
+        });
     }
   }
 };

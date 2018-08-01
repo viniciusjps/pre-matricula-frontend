@@ -30,7 +30,7 @@
 <script>
 import Vue from "vue";
 import Router from "vue-router";
-import Service from "./../Service.vue";
+import ServiceAdmin from "./../ServiceAdmin.vue";
 
 Vue.use(Router);
 var router = new Router();
@@ -42,16 +42,8 @@ export default {
   },
   methods: {
     signOut() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2
-        .signOut()
-        .then(function() {
-          console.log("User signed out.");
-        })
-        .then(a => {
-					this.$router.push("/");
-					Service.methods.loggout();
-        });
+			ServiceAdmin.methods.loggout();
+			this.$router.push('/admin/login');
     }
   }
 };

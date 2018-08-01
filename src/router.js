@@ -8,7 +8,6 @@ import notFound from "./components/NotFound.vue";
 import Disciplines from "./components/Disciplines.vue";
 import HomeAdmin from "./components/HomeAdmin.vue";
 import DisciplinesAdmin from "./components/DisciplinesAdmin.vue";
-import AllocationsAdmin from "./components/AllocationAdmin.vue";
 import LoginAdmin from "./components/LoginAdmin.vue";
 
 Vue.use(Router);
@@ -49,11 +48,6 @@ export default new Router({
             path: "/admin/disciplines",
             name: "disciplinesadmin",
             component: DisciplinesAdmin
-        },
-        {
-            path: "/admin/allocation",
-            name: "allocationadmin",
-            component: AllocationsAdmin
         },
         {
             path: "/admin/register/curricularcomponent",
