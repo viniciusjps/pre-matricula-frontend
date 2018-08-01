@@ -62,6 +62,9 @@ export default {
           });
         });
     },
+    getDisciplinesByEnrollment(enrollment) {
+      return this.getDisciplinesCodeByEnrollment(enrollment);
+    },
     setUserData() {
       this.name = Service.methods.getName();
       this.enrollment = Service.methods.getEnrollment();
@@ -78,9 +81,6 @@ export default {
         "http://api-sistema-pre-matricula.herokuapp.com/api/allocation/student/" +
           enrollment
       ).then(res => res.json());
-    },
-    getDisciplinesByEnrollment(enrollment) {
-      return this.getDisciplinesCodeByEnrollment(enrollment);
     }
   }
 };

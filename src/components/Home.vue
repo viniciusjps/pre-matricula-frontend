@@ -38,7 +38,7 @@
 						</div>
 						<consultenrollment></consultenrollment>
 						<br>
-						<button class="ui fluid button">Editar Pré Matricula</button>
+						<button class="ui fluid button" @click="editPreEnroll(profile.enrollment)">Editar Pré Matricula</button>
 						<br>
 					</div>
 				</div>
@@ -95,6 +95,15 @@ export default {
         "http://api-sistema-pre-matricula.herokuapp.com/api/allocation/student/" +
           value
       ).then(res => res.json());
+    },
+    editPreEnroll(value) {
+      let list = "";
+      this.getAllocationsByEnrollment(value)
+      .then(data => {
+        list = data.toLocaleString();
+        localStorage.setItem("disciplines", list);
+        this.$router.push('/disciplinas');
+      });
     }
   }
 };

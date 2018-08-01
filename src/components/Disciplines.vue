@@ -8,7 +8,7 @@
 					<div class="ui segments">
 						<div class="ui red inverted segment" v-if="!checkEnrollment">
 							<h4 class="ui center aligned header">Nº de créditos selecionados</h4>
-							<h5 class="ui center aligned header"> {{ creditsSelected }} </h5>
+							<h5 class="ui center aligned header"> {{ creditsSelected || '0' }} </h5>
 						</div>
             <div class="ui green inverted segment" v-else>
 							<h4 class="ui center aligned header">Nº de créditos selecionados</h4>
@@ -94,6 +94,7 @@ export default {
       "http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/"
     );
     this.setStudentEnrollment();
+    this.editPreEnroll();
   },
   methods: {
     updateDisciplines(link) {
@@ -124,6 +125,7 @@ export default {
       }
       this.doAllocation(disciplines).then(data => {
         this.$router.push("/home");
+        localStorage.removeItem("disciplines");
       });
     },
     doAllocation(data) {
@@ -153,6 +155,36 @@ export default {
           this.checkEnrollment = true;
         }
       }
+    },
+    editPreEnroll() {
+      if (localStorage.getItem("disciplines")) {
+        let disciplines = [];
+        let enroll = Service.methods.getEnrollment();
+        this.getDisciplinesByEnrollment(enroll)
+          .then(data => {
+            this.disciplines = data;
+          })
+          .then(a => {
+            this.disciplines.map(d => {
+              this.getDisciplineByCode(d).then(res => {
+                this.selectedEnrollments.push(res);
+                this.updateLimits();
+              });
+            });
+          });
+      }
+    },
+    getDisciplineByCode(code) {
+      return fetch(
+        "http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/" +
+          code
+      ).then(res => res.json());
+    },
+    getDisciplinesByEnrollment(enrollment) {
+      return fetch(
+        "http://api-sistema-pre-matricula.herokuapp.com/api/allocation/student/" +
+          enrollment
+      ).then(res => res.json());
     }
   }
 };
