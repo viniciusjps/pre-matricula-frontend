@@ -3,7 +3,7 @@
 		<div>
 			<div class="ui menu">
 				<router-link to="/home" active-class="active">
-					<a class="item">
+					<a class="item" @click="resetDisciplines()">
 						<i class="home icon"></i>
 						Home
 					</a>
@@ -52,7 +52,10 @@ export default {
 					this.$router.push("/");
 					Service.methods.loggout();
         });
-    }
+		},
+		resetDisciplines() {
+			localStorage.removeItem("disciplines");
+		}
   }
 };
 </script>

@@ -36,6 +36,8 @@
 						<br>
 						<register></register>
 						<br>
+						<search></search>
+						<br>
 						<changepassword></changepassword>
 						<br>
 					</div>
@@ -50,13 +52,15 @@ import Service from "./../Service.vue";
 import NavbarAdmin from "./NavbarAdmin.vue";
 import ChangePassword from "./ChangePassword.vue";
 import RegisterCurricularComponent from "./RegisterCurricularComponent";
+import SearchAllocation from './SearchAllocation.vue';
 
 export default {
   name: "home-admin",
   components: {
     navbar: NavbarAdmin,
 		changepassword: ChangePassword,
-		register: RegisterCurricularComponent
+		register: RegisterCurricularComponent,
+		search: SearchAllocation
   },
   data() {
     return {
