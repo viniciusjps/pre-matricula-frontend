@@ -76,7 +76,7 @@
 
 <script>
 import NavbarAdmin from "./NavbarAdmin.vue";
-import Service from "./../Service.vue";
+import Service from "./../ServiceAdmin.vue";
 import RegisterCurricularComponent from "./RegisterCurricularComponent";
 import SearchAllocation from './SearchAllocation.vue';
 
@@ -99,8 +99,14 @@ export default {
       "http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/"
     );
     this.setStudentEnrollment();
+    this.checkLog();
   },
   methods: {
+    checkLog() {
+			if (!localStorage.getItem("isAdminLogged")) {
+				this.$router.push('/admin/login');
+			}
+		},
     updateDisciplines(link) {
       return fetch(link).then(res => res.json());
     },

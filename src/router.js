@@ -3,7 +3,6 @@ import Router from "vue-router";
 import Home from "./components/Home.vue";
 import Login from "./components/Login.vue";
 import Register from "./components/Register.vue";
-import registerCurricularComponent from "./components/RegisterCurricularComponent.vue";
 import notFound from "./components/NotFound.vue";
 import Disciplines from "./components/Disciplines.vue";
 import HomeAdmin from "./components/HomeAdmin.vue";
@@ -48,11 +47,6 @@ export default new Router({
             path: "/admin/disciplines",
             name: "disciplinesadmin",
             component: DisciplinesAdmin
-        },
-        {
-            path: "/admin/register/curricularcomponent",
-            name: "registerCurricularComponent",
-            component: registerCurricularComponent
         },
         {
             path: "/admin",

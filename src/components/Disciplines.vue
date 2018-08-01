@@ -95,8 +95,14 @@ export default {
     );
     this.setStudentEnrollment();
     this.editPreEnroll();
+    this.checkLog();
   },
   methods: {
+    checkLog() {
+			if (!localStorage.getItem("isLogged")) {
+				this.$router.push('/');
+			}
+		},
     updateDisciplines(link) {
       return fetch(link).then(res => res.json());
     },
