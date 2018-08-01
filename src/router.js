@@ -8,56 +8,51 @@ import notFound from "./components/NotFound.vue";
 import Disciplines from "./components/Disciplines.vue";
 import HomeAdmin from "./components/HomeAdmin.vue";
 import DisciplinesAdmin from "./components/DisciplinesAdmin.vue";
-import AllocationsAdmin from "./components/AllocationAdmin.vue";
+import SearchAllocation from "./components/SearchAllocation.vue";
 
 Vue.use(Router);
 
 export default new Router({
-    routes: [
-        {
-            path: "/",
-            name: "login",
-            component: Login
-        },
-        {
-            path: "/home",
-            name: "home",
-            component: Home
-        },
-        {
-            path: "/register",
-            name: "register",
-            component: Register
-        },
-        {
-            path: "/404",
-            name: "notFound",
-            component: notFound
-        },
-        {
-            path: "/disciplinas",
-            name: "disciplines",
-            component: Disciplines
-        },
-        {
-            path: "/admin/disciplines",
-            name: "disciplinesadmin",
-            component: DisciplinesAdmin
-        },
-        {
-            path: "/admin/allocation",
-            name: "allocationadmin",
-            component: AllocationsAdmin
-        },
-        {
-            path: "/admin/register/curricularcomponent",
-            name: "registerCurricularComponent",
-            component: registerCurricularComponent
-        },
-        {
-            path: "/admin",
-            name: "homeadmin",
-            component: HomeAdmin
-        }
-    ]
+	routes: [
+		{
+			path: "/",
+			name: "login",
+			component: Login
+		},
+		{
+			path: "/home",
+			name: "home",
+			component: Home
+		},
+		{
+			path: "/register",
+			name: "register",
+			component: Register
+		},
+		{
+			path: "/404",
+			name: "notFound",
+			component: notFound
+		},
+		{
+			path: "/disciplinas",
+			name: "disciplines",
+			component: Disciplines
+		},
+		{
+			path: "/admin/disciplines",
+			name: "disciplinesadmin",
+			component: DisciplinesAdmin
+		},
+		{
+			path: "/admin/register/curricularcomponent",
+			name: "registerCurricularComponent",
+			component: registerCurricularComponent
+		},
+		{
+			path: "/admin",
+			name: "homeadmin",
+			component: HomeAdmin
+		}
+	]
 });
