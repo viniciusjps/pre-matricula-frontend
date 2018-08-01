@@ -11,40 +11,58 @@
 								<div class="ui segment">
 									<div class="field">
 										<div class="ui labeled icon input">
-											<div class="ui label">Código &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+											<div id="btn" class="ui label">Código &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 											<input type="text" placeholder="Digite o código da disciplina" v-model="code">
 										</div>
 									</div>
 									<div class="field">
 										<div class="ui labeled icon input">
-											<div class="ui label">Nome &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+											<div id="btn" class="ui label">Nome &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 											<input type="text" v-model="name" placeholder="Digite o nome">
 										</div>
 									</div>
 									<div class="field">
 										<div class="ui labeled icon input">
-											<div class="ui label">Créditos &nbsp;&nbsp;&nbsp;&nbsp;</div>
+											<div id="btn" class="ui label">Créditos &nbsp;&nbsp;&nbsp;&nbsp;</div>
 											<input type="text" v-model="credits" placeholder="Digite a quatidade de créditos">
 										</div>
 									</div>
-									<div class="field">
-										<div class="ui labeled icon input">
-											<div class="ui label">Tipo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-											<input type="text" v-model="type" placeholder="Tipo da disciplina">
-										</div>
-									</div>
-									<div class="field">
-										<div class="ui labeled icon input">
-											<div class="ui label">Grade &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-											<input type="text" v-model="gridType" placeholder="Digite o tipo de PCC">
-										</div>
-									</div>
-									<div class="field">
-										<div class="ui labeled icon input">
-											<div class="ui label">Semestre &nbsp;</div>
-											<input type="text" v-model="period" placeholder="Digite o semestre da qual faz parte">
-										</div>
-									</div>
+									<sui-dropdown fluid placeholder="Tipo" selection :options="typeOptions" v-model="type" />
+									<br>
+									<sui-dropdown fluid placeholder="Tipo de PCC" selection :options="gridOptions" v-model="gridType" />
+									<br>
+									<sui-form>
+										<sui-form-fields inline>
+											<label>Semestre: </label>
+											<sui-form-field>
+												<sui-checkbox label="1" radio value="1" v-model="period" />
+											</sui-form-field>
+											<sui-form-field>
+												<sui-checkbox label="2" radio value="2" v-model="period" />
+											</sui-form-field>
+											<sui-form-field>
+												<sui-checkbox label="3" radio value="3" v-model="period" />
+											</sui-form-field>
+											<sui-form-field>
+												<sui-checkbox label="4" radio value="4" v-model="period" />
+											</sui-form-field>
+											<sui-form-field>
+												<sui-checkbox label="5" radio value="5" v-model="period" />
+											</sui-form-field>
+											<sui-form-field>
+												<sui-checkbox label="6" radio value="6" v-model="period" />
+											</sui-form-field>
+											<sui-form-field>
+												<sui-checkbox label="7" radio value="7" v-model="period" />
+											</sui-form-field>
+											<sui-form-field>
+												<sui-checkbox label="8" radio value="8" v-model="period" />
+											</sui-form-field>
+											<sui-form-field>
+												<sui-checkbox label="9" radio value="9" v-model="period" />
+											</sui-form-field>
+										</sui-form-fields>
+									</sui-form>
 									<br>
 									<button id="add" class="ui fluid button" @click="registerDiscipline()">
 										Cadastrar
@@ -78,9 +96,37 @@ export default {
       code: "",
       name: "",
       credits: "",
-      type: "",
-      gridType: "",
-      period: ""
+      type: null,
+      gridType: null,
+      period: "",
+      typeOptions: [
+        {
+          text: "Complementar",
+          value: "Complementar"
+        },
+        {
+          text: "Obrigatória",
+          value: "Obrigatória"
+        },
+        {
+          text: "Optativa Específica",
+          value: "Opt. Específica"
+        },
+        {
+          text: "Optativa Geral",
+          value: "Opt. Geral"
+        }
+      ],
+      gridOptions: [
+        {
+          text: "Grade Nova",
+          value: "Nova"
+        },
+        {
+          text: "Grade Antiga",
+          value: "Antiga"
+        }
+      ]
     };
   },
   methods: {
@@ -107,8 +153,8 @@ export default {
           body: JSON.stringify(data)
         }
       ).then(a => {
-				this.toggle();
-			});
+        this.toggle();
+      });
     }
   }
 };
@@ -118,5 +164,10 @@ export default {
 #add {
   color: #ffffff;
   background-color: #74accb;
+}
+
+#btn {
+	color: #ffffff;
+	background-color: #74accb;
 }
 </style>

@@ -17,7 +17,7 @@
 					</div>
 					<register></register>
 					<br>
-					<button class="ui fluid button">Editar disciplina</button>
+          <search></search>
 				</div>
 				<div class="twelve wide column">
 					<br>
@@ -78,12 +78,14 @@
 import NavbarAdmin from "./NavbarAdmin.vue";
 import Service from "./../Service.vue";
 import RegisterCurricularComponent from "./RegisterCurricularComponent";
+import SearchAllocation from './SearchAllocation.vue';
 
 export default {
   name: "disciplines-admin",
   components: {
     navbar: NavbarAdmin,
-    register: RegisterCurricularComponent
+    register: RegisterCurricularComponent,
+    search: SearchAllocation
   },
   data() {
     return {
