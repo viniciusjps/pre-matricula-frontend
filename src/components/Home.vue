@@ -70,9 +70,8 @@ export default {
     };
   },
   created() {
-    this.setProfileData();
     Service.methods.reloadPage();
-    console.log(Service.methods.getName());
+    this.setProfileData();
     this.setCheckEnrollment(Service.methods.getEnrollment());
   },
   methods: {
