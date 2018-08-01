@@ -114,7 +114,9 @@ export default {
   },
   methods: {
     toggle() {
-      this.open = !this.open;
+      this.open = !this.open;      
+      this.codeInputDiscipline = '';
+      this.codeInputEnrollment = '';
     },
     setExibitor(value) {
       this.exibitor = value;
