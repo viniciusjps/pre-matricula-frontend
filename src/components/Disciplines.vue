@@ -15,7 +15,7 @@
 							<h5 class="ui center aligned header"> {{ selectedEnrollments.length || 0 }} </h5>
 						</div>
 					</div>
-					<button class="ui blue fluid button" :disabled="checkEnrollment" @click="setAllocation()">Realizar pré matrícula</button>
+					<button class="ui blue fluid button" :disabled="!checkEnrollment" @click="setAllocation()">Realizar pré matrícula</button>
 				</div>
 				<div class="twelve wide column">
 					<br>
@@ -38,7 +38,10 @@
 											<label></label>
 										</div>
 										<td>
-											<h5 class="ui left header"> {{ item.name || '-' }} </h5>
+											<h5 class="ui left header"> 
+                        {{ item.name || '-' }} 
+                        <i class="ui label"> {{ item.gridType || '-' }} </i>
+                      </h5>
 										</td>
 									</td>
 									<td id="creditos">
@@ -134,9 +137,14 @@ export default {
     },
     updateLimits() {
       if (this.selectedEnrollments.length > 0) {
-        let index = 0;
-        this.selectedEnrollments.map(a => {index += a.credits});
-        this.creditsSelected = index;
+        let sum = 0;
+        this.selectedEnrollments.map(a => {sum += a.credits});
+        this.creditsSelected = sum;
+        if (sum >= 16 && sum <= 24) {
+          this.checkEnrollment = true;
+        } else {
+          this.checkEnrollment = false;
+        }
       } else {
         this.creditsSelected = 0;
       }

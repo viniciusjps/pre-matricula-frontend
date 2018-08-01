@@ -12,7 +12,7 @@
 						</div>
 						<div class="ui segment">
 							<h4 class="ui center aligned header">Nº de disciplinas cadastradas</h4>
-							<h5 class="ui center aligned header">  </h5>
+							<h5 class="ui center aligned header"> {{ enrollments.length }} </h5>
 						</div>
 					</div>
 					<register></register>
@@ -25,22 +25,29 @@
 						<table class="ui table">
 							<thead>
 								<tr>
-									<th></th>
+									<th>Opções</th>
 									<th>Disciplina</th>
+                  <th>Código</th>
 									<th>Créditos</th>
 									<th>Semestre</th>
 									<th>Tipo</th>
+                  <!--th>Qtd. de pedidos</th-->
 								</tr>
 							</thead>
 							<tbody>
 								<tr class="" v-for="(item, index) in enrollments" :key="index">
 									<td class="center aligned">
-										<button class="ui negative tiny circular button" @click="deleteDiscipline(item.code)">
-                      <i class="trash alternate icon"></i>Apagar
-                    </button>
+                    <div title="Apagar" id="delete_button" class="ui red label" @click="deleteDiscipline(item.code)"><i class="trash alternate icon"></i></div>
+                    <div title="Atualizar as informações" id="edit_button" class="ui label" @click="updateDiscipline(item)"><i class="edit icon"></i></div>
 										<td>
-											<h5 class="ui left header"> {{ item.name || '-' }} </h5>
+											<h5 class="ui left header"> 
+                        {{ item.name || '-' }} 
+                        <i class="ui label"> {{ item.gridType || '-' }} </i>
+                      </h5>
 										</td>
+									</td>
+                  <td id="codigo">
+										<h5 class="ui center aligned inverted header"> {{ item.code || '-' }} </h5>
 									</td>
 									<td id="creditos">
 										<h5 class="ui center inverted aligned header"> {{ item.credits || '-' }} </h5>
@@ -54,6 +61,9 @@
 									<td id="tipo_optativa" v-else>
 										<h5 class="ui center aligned inverted header"> {{ item.type || '-' }} </h5>
 									</td>
+                  <!--td id="quantidade">
+										<h5 class="ui center aligned inverted header"> {{ getAmoutRequest(item.code) || '-' }} </h5>
+									</td-->
 								</tr>
 							</tbody>
 						</table>
@@ -78,7 +88,6 @@ export default {
   data() {
     return {
       enrollments: [{ name: "Carregando disciplinas ..." }],
-      selectedEnrollments: [],
       studentEnrollment: ""
     };
   },
@@ -126,6 +135,20 @@ export default {
           method: "DELETE"
         }
       );
+    },
+    getNumberOfRequest(code) {
+      return fetch(
+        "http://api-sistema-pre-matricula.herokuapp.com/api/allocation/discipline/" + code
+      ).then(res => res.json());
+    },
+    getAmoutRequest(code) {
+      let amount = 0;
+      this.getNumberOfRequest(code)
+      .then(a => {
+        amount = a.length;
+        console.log(amount);
+      });
+      return amount;
     }
   }
 };
@@ -141,14 +164,22 @@ export default {
 }
 
 #semestre {
-  background-color: #919191;
+  background-color: #a8a8a8;
 }
 
 #creditos {
   background-color: #c2c2c2;
 }
 
+#codigo {
+  background-color: #d8d8d8;
+}
+
 #check_box {
   position: fixed;
+}
+
+#delete_button {
+  cursor: pointer;
 }
 </style>
