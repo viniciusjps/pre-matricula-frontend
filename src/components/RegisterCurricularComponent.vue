@@ -106,7 +106,9 @@ export default {
           method: "POST",
           body: JSON.stringify(data)
         }
-      );
+      ).then(a => {
+				this.toggle();
+			});
     }
   }
 };

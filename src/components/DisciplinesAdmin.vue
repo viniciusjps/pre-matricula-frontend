@@ -35,7 +35,9 @@
 							<tbody>
 								<tr class="" v-for="(item, index) in enrollments" :key="index">
 									<td class="center aligned">
-										<button class="ui negative button" @click="deleteDiscipline(item.code)">Apagar</button>
+										<button class="ui negative tiny circular button" @click="deleteDiscipline(item.code)">
+                      <i class="trash alternate icon"></i>Apagar
+                    </button>
 										<td>
 											<h5 class="ui left header"> {{ item.name || '-' }} </h5>
 										</td>

@@ -112,7 +112,7 @@ export default {
         const element = this.selectedEnrollments[index];
         disciplines.push({
           studentEnrollment: this.studentEnrollment,
-          disciplineCode: element
+          disciplineCode: element.code
         });
       }
       this.doAllocation(disciplines).then(data => {
