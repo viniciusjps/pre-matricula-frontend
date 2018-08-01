@@ -118,8 +118,7 @@ img.logo {
   height: 250px;
 }
 
-#login {
+body {
   background: url("https://i.imgur.com/dJAm5p8.jpg");
-  /*background: url("https://i.imgur.com/A26DD0Q.jpg");*/
 }
 </style>
