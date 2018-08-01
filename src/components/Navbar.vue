@@ -47,10 +47,10 @@ export default {
         .signOut()
         .then(function() {
           console.log("User signed out.");
+					Service.methods.loggout();
         })
         .then(a => {
 					this.$router.push("/");
-					Service.methods.loggout();
         });
 		},
 		resetDisciplines() {

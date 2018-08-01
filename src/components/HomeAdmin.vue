@@ -73,9 +73,15 @@ export default {
   created() {
     ServiceAdmin.methods.reloadPage();
     this.setProfileData();
-    this.setRequests();
+		this.setRequests();
+		this.checkLog();
   },
   methods: {
+		checkLog() {
+			if (!localStorage.getItem("isAdminLogged")) {
+				this.$router.push('/admin/login');
+			}
+		},
     setProfileData() {
       this.profile.name = ServiceAdmin.methods.getName();
       this.profile.email = ServiceAdmin.methods.getEmail();

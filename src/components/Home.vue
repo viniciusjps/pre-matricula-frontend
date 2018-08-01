@@ -73,8 +73,14 @@ export default {
     Service.methods.reloadPage();
     this.setProfileData();
     this.setCheckEnrollment(Service.methods.getEnrollment());
+    this.checkLog();
   },
   methods: {
+    checkLog() {
+			if (!localStorage.getItem("isLogged")) {
+				this.$router.push('/');
+			}
+		},
     setProfileData() {
       this.userUrlImage = Service.methods.getUrl();
       this.profile.name = Service.methods.getName();
