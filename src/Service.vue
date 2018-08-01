@@ -11,7 +11,8 @@ export default {
         name: '',
         email: '',
         enrollment: '',
-        url: ''
+        url: '',
+        gridType: ''
       }
   },
   methods: {
@@ -30,18 +31,24 @@ export default {
     getUrl() {
       return this.url;
     },
+    getGridType() {
+			return this.gridType;
+		},
 
-    loggin(profile, value) {
+    loggin(profile, grid, value) {
       this.name = profile.getName();
       this.email = profile.getEmail();
       this.url = profile.getImageUrl();
+      
       this.enrollment = value;
+      this.gridType = grid;
 
       localStorage.setItem("isLogged", true);
       localStorage.setItem("name", this.name);
       localStorage.setItem("enrollment", value);
       localStorage.setItem("email", this.email);
       localStorage.setItem("url", this.url);
+      localStorage.setItem("gridType", this.gridType);
     },
     loggout() {
       localStorage.setItem("isLogged", false);
@@ -49,6 +56,7 @@ export default {
       localStorage.removeItem("enrollment");
       localStorage.removeItem("email");
       localStorage.removeItem("url");
+      localStorage.removeItem("gridType");
       location.reload();
     },
     reloadPage() {
@@ -56,6 +64,7 @@ export default {
       this.enrollment = localStorage.getItem("enrollment");
       this.email = localStorage.getItem("email");
       this.url = localStorage.getItem("url");
+      this.gridType = localStorage.getItem("gridType");
     }
   }
 }

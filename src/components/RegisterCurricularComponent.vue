@@ -118,6 +118,10 @@ export default {
         }
       ],
       gridOptions: [
+				{
+          text: "Ambas",
+          value: "Ambas"
+        },
         {
           text: "Grade Nova",
           value: "Nova"

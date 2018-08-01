@@ -29,6 +29,7 @@
 							<input type="text" placeholder="Digite sua matricula" v-model="profile.enrollment">
 						</div>
 					</div>
+					<sui-dropdown fluid placeholder="Tipo de PCC" selection :options="gridOptions" v-model="profile.gridType" />
 					<br>
 					<button class="ui fluid button" @click="registerUser()">
 						Entrar
@@ -41,6 +42,10 @@
 
 <script>
 import Service from "./../Service.vue";
+import SuiVue from "semantic-ui-vue";
+import Vue from "vue";
+
+Vue.use(SuiVue);
 
 export default {
   name: "register",
@@ -51,6 +56,7 @@ export default {
       	name: "",
 				email: "",
 				url: "",
+				gridType: null,
 				getName() {
 					return this.name;
 				},
@@ -62,8 +68,21 @@ export default {
 				},
 				getEnrollment() {
 					return this.enrollment;
+				},
+				getGridType() {
+					return this.gridType;
 				}
-			}
+			},
+			gridOptions: [
+        {
+          text: "Grade Nova",
+          value: "Nova"
+        },
+        {
+          text: "Grade Antiga",
+          value: "Antiga"
+        }
+      ]
     };
   },
   created() {
@@ -75,7 +94,7 @@ export default {
     registerUser() {
 			Service.methods.setEnrollment(this.profile.enrollment);
 			this.url = Service.methods.getUrl();
-			Service.methods.loggin(this.profile, this.profile.enrollment);
+			Service.methods.loggin(this.profile, this.profile.gridType, this.profile.enrollment);
 			this.addNewUser()
 				.then(data => {
 					this.$router.push("/home");
@@ -91,13 +110,15 @@ export default {
         body: JSON.stringify({
           enrollment: Service.methods.getEnrollment(),
           name: Service.methods.getName(),
-          email: Service.methods.getEmail()
+					email: Service.methods.getEmail(),
+					gridType: Service.methods.getGridType()
         })
       });
     }
   }
 };
 </script>
+
 <style scoped>
 .ui.label {
   color: #ffffff;
