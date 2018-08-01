@@ -2,12 +2,12 @@
   <div id="change-password">
     <sui-button fluid @click.native="toggle">Alterar senha</sui-button>
     <sui-modal v-model="open">
-      <sui-modal-header>Intenção de matrícula</sui-modal-header>
+      <sui-modal-header>Pesquisar</sui-modal-header>
       <sui-modal-content>
         <sui-modal-description>
           <div class="ui segments">
-            <div class="ui segment" v-for="(item, index) in disciplinesList" :key="index">
-              <h4>{{ item.name }}</h4>
+            <div class="ui segment">
+              <h4>{{ name }}</h4>
             </div>
           </div>
         </sui-modal-description>

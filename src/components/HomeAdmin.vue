@@ -36,7 +36,7 @@
 						<br>
 						<register></register>
 						<br>
-						<change-password></change-password>
+						<changepassword></changepassword>
 						<br>
 					</div>
 				</div>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import Service from "./../Service.vue";
 import NavbarAdmin from "./NavbarAdmin.vue";
 import ChangePassword from "./ChangePassword.vue";
 import RegisterCurricularComponent from "./RegisterCurricularComponent";
@@ -54,7 +55,7 @@ export default {
   name: "home-admin",
   components: {
     navbar: NavbarAdmin,
-		changepasword: ChangePassword,
+		changepassword: ChangePassword,
 		register: RegisterCurricularComponent
   },
   data() {

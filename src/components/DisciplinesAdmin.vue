@@ -1,6 +1,6 @@
 <template>
 	<div id="disciplines-admin">
-		<navbar-admin></navbar-admin>
+		<navbar></navbar>
 		<div class="ui container">
 			<div class="ui two column very relaxed stackable grid">
 				<div class="four wide column">
@@ -15,8 +15,9 @@
 							<h5 class="ui center aligned header">  </h5>
 						</div>
 					</div>
-					<button class="ui blue fluid button">Cadastrar disciplina</button>
-					<button class="ui blue fluid button">Editar disciplina</button>
+					<register></register>
+					<br>
+					<button class="ui fluid button">Editar disciplina</button>
 				</div>
 				<div class="twelve wide column">
 					<br>
@@ -64,11 +65,13 @@
 <script>
 import NavbarAdmin from "./NavbarAdmin.vue";
 import Service from "./../Service.vue";
+import RegisterCurricularComponent from "./RegisterCurricularComponent";
 
 export default {
   name: "disciplines-admin",
   components: {
-    navbar: NavbarAdmin
+    navbar: NavbarAdmin,
+    register: RegisterCurricularComponent
   },
   data() {
     return {
@@ -101,10 +104,27 @@ export default {
     },
     setStudentEnrollment() {
       this.studentEnrollment = Service.methods.getEnrollment();
-		},
-		deleteDiscipline(value) {
-
-		}
+    },
+    deleteDiscipline(value) {
+      this.delete(value).then(a => {
+        this.getEnrollments(
+          "http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/"
+        );
+      });
+    },
+    delete(value) {
+      return fetch(
+        "http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/" +
+          value,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          method: "DELETE"
+        }
+      );
+    }
   }
 };
 </script>
