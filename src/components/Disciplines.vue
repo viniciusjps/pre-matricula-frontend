@@ -38,7 +38,7 @@
 								<tr class="" v-for="(item, index) in enrollments" :key="index">
 									<td class="center aligned">
 										<div class="ui checkbox">
-											<input type="checkbox" :id="item.code" :change="updateLimits()" :value="item" v-model="selectedEnrollments">
+											<input type="checkbox" :id="item.code" @change="updateLimits()" :value="item" v-model="selectedEnrollments">
 											<label></label>
 										</div>
 										<td>
