@@ -27,10 +27,11 @@
 									<th>Aluno</th>
 									<th>Email</th>
 									<th>Matricula</th>
+                  <th>Disciplinas</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="" v-for="(item, index) in students" :key="index">
+								<tr class="" v-for="(item, index) in allocations" :key="index">
 									<td>
 										<h5 class="ui left header"> {{ item.name || '-' }} </h5>
 									</td>
@@ -40,10 +41,13 @@
 									<td>
 										<h5 class="ui left header"> {{ item.enrollment || '-' }} </h5>
 									</td>
+                  <td>
+										<h5 class="ui left header"> {{ item.disciplines.join(", ") || '-' }} </h5>
+									</td>
 								</tr>
 							</tbody>
 						</table>
-						<table class="ui table" v-else-if="this.exibitor == 'discipline'">
+						<table class="ui table" v-else-if="this.exibitor == 'disciplines'">
 							<thead>
 								<tr>
 									<th>Matriculas</th>
@@ -52,12 +56,12 @@
 							<tbody>
 								<tr class="" v-for="(item, index) in enrollmentsByDiscipline" :key="index">
 									<td>
-										<h5 class="ui left header"> {{ item || '-' }} </h5>
+										<h5 class="ui left header"> {{ item.name || '-' }} </h5>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-						<table class="ui table" v-else>
+						<table class="ui table" v-else-if="this.exibitor == 'enroll'">
 							<thead>
 								<tr>
 									<th>Disciplinas</th>
@@ -95,28 +99,30 @@ export default {
       exibitor: "all",
       open: false,
       students: {},
-			allocations: {},
+      allocations: [],
       enrollmentsByDiscipline: [],
       disciplinesByEnrollment: [],
-			
-			codeInputDiscipline: "",
-			codeInputEnrollment: ""
+
+      codeInputDiscipline: "",
+      codeInputEnrollment: ""
     };
   },
   created() {
+    /*
     this.updateUsers();
     this.getAllocations().then(data => {
       this.allocations = data;
     });
     this.getStudentsAllocations().then(data => {
       this.students = data;
-    });
+    });*/
+    this.newGetAllocations();
   },
   methods: {
     toggle() {
-      this.open = !this.open;      
-      this.codeInputDiscipline = '';
-      this.codeInputEnrollment = '';
+      this.open = !this.open;
+      this.codeInputDiscipline = "";
+      this.codeInputEnrollment = "";
     },
     setExibitor(value) {
       this.exibitor = value;
@@ -126,14 +132,14 @@ export default {
     },
     searchByEnrollment() {
       if (window.event.keyCode == 13) {
-        this.disciplinesByEnrollment = this.students[this.codeInputDiscipline];
+        let enrollment =  this.codeInputEnrollment;
+        this.disciplinesByEnrollment = this.allocations.filter(e => e.enrollment === enrollment)[0].disciplines;
       }
     },
     searchByDiscipline() {
       if (window.event.keyCode == 13) {
-        this.enrollmentsByDiscipline = this.allocations[
-          this.codeInputDiscipline
-        ];
+        let code =  this.codeInputDiscipline;
+        this.enrollmentsByDiscipline = this.allocations.filter(e => e.disciplines.includes(code));
       }
     },
     getAllocations() {
@@ -175,6 +181,36 @@ export default {
       return fetch(
         "http://api-sistema-pre-matricula.herokuapp.com/api/allocation/student"
       ).then(d => d.json());
+    },
+    newGetAllocations() {
+      let urlBase = "http://api-sistema-pre-matricula.herokuapp.com/api";
+      fetch(urlBase + "/allocation/student")
+        .then(d => d.json())
+        .then(estudantes => Object.keys(estudantes))
+        .then(a =>
+          a.map(e => {
+            let temp = {};
+            temp.enrollment = e;
+            fetch(urlBase + "/allocation/student/" + e)
+              .then(disciplinas => disciplinas.json())
+              .then(disc => {
+                temp.disciplines = disc;
+              })
+              .then(b => this.allocations.push(temp))
+              .then(
+                fetch(urlBase + "/user")
+                  .then(usuarios => usuarios.json())
+                  .then(users =>
+                    users.map(u => {
+                      if (u.enrollment === e) {
+                        temp.name = u.name;
+                        temp.email = u.email;
+                      }
+                    })
+                  )
+              );
+          })
+        );
     }
   }
 };
