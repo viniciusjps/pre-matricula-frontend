@@ -38,7 +38,6 @@
 								<tr class="" v-for="(item, index) in enrollments" :key="index">
 									<td class="center aligned">
                     <div title="Apagar" id="delete_button" class="ui red label" @click="deleteDiscipline(item.code)"><i class="trash alternate icon"></i></div>
-                    <div title="Atualizar as informações" id="edit_button" class="ui label" @click="updateDiscipline(item)"><i class="edit icon"></i></div>
 										<td>
 											<h5 class="ui left header"> 
                         {{ item.name || '-' }} 
