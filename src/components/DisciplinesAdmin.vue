@@ -8,7 +8,7 @@
 					<div class="ui segments">
 						<div class="ui blue secondary segment">
 							<h4 class="ui center aligned header">Nº de solicitações</h4>
-							<h5 class="ui center aligned header">  </h5>
+							<h5 class="ui center aligned header"> {{requests}} </h5>
 						</div>
 						<div class="ui segment">
 							<h4 class="ui center aligned header">Nº de disciplinas cadastradas</h4>
@@ -89,7 +89,8 @@ export default {
   data() {
     return {
       enrollments: [{ name: "Carregando disciplinas ..." }],
-      studentEnrollment: ""
+      studentEnrollment: "",
+      requests: ''
     };
   },
   created() {
@@ -97,6 +98,7 @@ export default {
     this.getEnrollments(
       "http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/"
     );
+    this.setRequests();
     this.setStudentEnrollment();
     this.checkLog();
   },
@@ -156,6 +158,9 @@ export default {
         console.log(amount);
       });
       return amount;
+    },
+    setRequests() {
+      this.requests = localStorage.getItem("allocations");
     }
   }
 };

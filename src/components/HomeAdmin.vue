@@ -90,12 +90,7 @@ export default {
       });
     },
     setRequests() {
-      fetch("http://api-sistema-pre-matricula.herokuapp.com/api/allocation")
-        .then(d => d.json())
-        .then(a => {
-					this.requests = Object.keys(a).length;
-					localStorage.setItem("requests", this.requests);
-        });
+      this.requests = localStorage.getItem("allocations");
     }
   }
 };

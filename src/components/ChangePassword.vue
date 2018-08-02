@@ -70,12 +70,12 @@ export default {
     },
     setPassword() {
       return fetch("http://api-sistema-pre-matricula.herokuapp.com/api/coordinator/password", {
-        method: "UPDATE",
+        method: "PUT",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        body: [this.oldPassword, this.newPassword]
+        body: JSON.stringify([this.oldPassword, this.newPassword])
       });
     }
   }

@@ -1,9 +1,10 @@
 <template>
 	<div id="register">
-		<sui-button fluid @click.native="toggle">Cadastrar disciplinas</sui-button>
+		<sui-button fluid @click.native="toggle">Cadastrar disciplinas / Editar Disciplina</sui-button>
 		<sui-modal v-model="open">
 			<sui-modal-header>Adicionar nova disciplina</sui-modal-header>
 			<sui-modal-content>
+				<div class="ui teal message">Para editar uma disciplina já cadastrada insira o seu código e as demais informações.</div>
 				<sui-modal-description>
 					<div id="register" class="ui middle aligned center aligned grid">
 						<div class="column">
@@ -27,7 +28,7 @@
 											<input type="text" v-model="credits" placeholder="Digite a quatidade de créditos">
 										</div>
 									</div>
-									<sui-dropdown fluid placeholder="Tipo" selection :options="typeOptions" v-model="type" />
+									<sui-dropdown fluid placeholder="Tipo da Disciplina" selection :options="typeOptions" v-model="type" />
 									<br>
 									<sui-dropdown fluid placeholder="Tipo de PCC" selection :options="gridOptions" v-model="gridType" />
 									<br>
