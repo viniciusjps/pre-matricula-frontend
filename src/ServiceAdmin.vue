@@ -1,17 +1,17 @@
 <script>
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from "vue";
+import Router from "vue-router";
 
 Vue.use(Router);
 var router = new Router();
 
 export default {
   data() {
-      return {
-        name: '',
-        email: '',
-        url: ''
-      }
+    return {
+      name: "",
+      email: "",
+      url: ""
+    };
   },
   methods: {
     getEmail() {
@@ -44,11 +44,11 @@ export default {
       this.email = localStorage.getItem("email");
       this.url = localStorage.getItem("url");
       this.url = localStorage.getItem("isAdminLogged");
-    },
+    } /*,
     getUrl(email) {
     return fetch('http://picasaweb.google.com/data/entry/api/user/' + email + '?alt=json')
       .then(response => response.json());
+    }*/
   }
-  }
-}
+};
 </script>

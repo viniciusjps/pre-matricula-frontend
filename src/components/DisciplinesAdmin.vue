@@ -1,6 +1,6 @@
 <template>
 	<div id="disciplines-admin">
-		<navbar></navbar>
+		<navbarAdmin></navbarAdmin>
 		<div class="ui container">
 			<div class="ui two column very relaxed stackable grid">
 				<div class="four wide column">
@@ -75,14 +75,15 @@
 
 <script>
 import NavbarAdmin from "./NavbarAdmin.vue";
-import Service from "./../ServiceAdmin.vue";
+import ServiceAdmin from "./../ServiceAdmin.vue";
+import Service from "./../Service.vue";
 import RegisterCurricularComponent from "./RegisterCurricularComponent";
 import SearchAllocation from './SearchAllocation.vue';
 
 export default {
   name: "disciplines-admin",
   components: {
-    navbar: NavbarAdmin,
+    navbarAdmin: NavbarAdmin,
     register: RegisterCurricularComponent,
     search: SearchAllocation
   },
@@ -94,7 +95,7 @@ export default {
     };
   },
   created() {
-    Service.methods.reloadPage();
+    ServiceAdmin.methods.reloadPage();
     this.getEnrollments(
       "http://api-sistema-pre-matricula.herokuapp.com/api/curricularComponent/"
     );
@@ -104,7 +105,8 @@ export default {
   },
   methods: {
     checkLog() {
-			if (!localStorage.getItem("isAdminLogged")) {
+      let logged = JSON.parse(localStorage.getItem("isAdminLogged"));
+			if (!logged) {
 				this.$router.push('/admin/login');
 			}
 		},

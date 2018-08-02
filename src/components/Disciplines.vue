@@ -99,7 +99,8 @@ export default {
   },
   methods: {
     checkLog() {
-			if (!localStorage.getItem("isLogged")) {
+			let logged = JSON.parse(localStorage.getItem("isLogged"));
+			if (!logged) {
 				this.$router.push('/');
 			}
 		},

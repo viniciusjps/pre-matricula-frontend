@@ -1,6 +1,6 @@
 <template>
 	<div id="home-admin">
-		<navbar></navbar>
+		<navbarAdmin></navbarAdmin>
 		<br>
 		<div class="ui container">
 			<br>
@@ -55,7 +55,7 @@ import { request } from 'http';
 export default {
   name: "home-admin",
   components: {
-    navbar: NavbarAdmin,
+    navbarAdmin: NavbarAdmin,
     changepassword: ChangePassword,
     register: RegisterCurricularComponent,
     search: SearchAllocation
@@ -78,16 +78,17 @@ export default {
   },
   methods: {
 		checkLog() {
-			if (!localStorage.getItem("isAdminLogged")) {
+			let logged = JSON.parse(localStorage.getItem("isAdminLogged"));
+			if (!logged) {
 				this.$router.push('/admin/login');
 			}
 		},
     setProfileData() {
       this.profile.name = ServiceAdmin.methods.getName();
       this.profile.email = ServiceAdmin.methods.getEmail();
-      ServiceAdmin.methods.getUrl(this.profile.email).then(json => {
+      /*ServiceAdmin.methods.getUrl(this.profile.email).then(json => {
         this.profile.url = json["entry"]["gphoto$thumbnail"]["$t"];
-      });
+      });*/
     },
     setRequests() {
       this.requests = localStorage.getItem("allocations");

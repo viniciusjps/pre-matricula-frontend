@@ -15,8 +15,8 @@
 					</a>
 				</router-link>
 				<div class="right menu">
-					<router-link to="/" active-class="active">
-						<a class="item" @click="signOut()">
+					<router-link to="/admin/login" active-class="active">
+						<a class="item" @click="signOutAdmin()">
 							<i class="sign out icon"></i>
 							Logout
 						</a>
@@ -36,14 +36,13 @@ Vue.use(Router);
 var router = new Router();
 
 export default {
-  name: "navbar-admin",
+  name: "navbarAdmin",
   data() {
     return {};
   },
   methods: {
-    signOut() {
+    signOutAdmin() {
 			ServiceAdmin.methods.loggout();
-			this.$router.push('/admin/login');
     }
   }
 };
