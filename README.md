@@ -1,21 +1,35 @@
-# sistema-pre-matricula
+![node](https://img.shields.io/node/v/passport.svg)
+![GitHub top language](https://img.shields.io/github/languages/top/viniciusjps/pre-matricula-frontend.svg)
+![GitHub language count](https://img.shields.io/github/languages/count/viniciusjps/pre-matricula-frontend.svg)
+![GitHub last commit](https://img.shields.io/github/last-commit/viniciusjps/pre-matricula-frontend.svg)
+![GitHub repo size in bytes](https://img.shields.io/github/repo-size/viniciusjps/pre-matricula-frontend.svg)
+# Sistema de Pré Matrícula
+<p align="center">
+  <img src="https://i.imgur.com/Ia5ZDQk.png?1" width="500">
+</p>
+Sistema produzido para a disciplina de Projeto de Software, do curso de Ciências da Computação UFCG, 2018.1, pelos alunos:
 
-> Sistema de Pre Matricula UFCG
+##### Frontend:
+  - [Geovane Silva](https://github.com/geovanens)
+  - [Vinícius Jorge](https://github.com/viniciusjps)
+##### Backend:
+  - [Cássio Eduardo](https://github.com/cassioegc)
+  - [Hemillainy Santos](https://github.com/hemillainysantos)
+  
+que pode ser acessado [clicando aqui](http://prematricula.herokuapp.com)
 
-## Build Setup
+## Do que se trata?
+Esse sistema tem como objetivo otimizar o processo de pré matrículas do curso computação@ufcg. Nesse sistema o usuário faz seu cadastro por meio do email @ccc, preenche o formulário e pronto, já está apto a realizar as intenções de matrículas em disciplinas, desde que satisfaçam as condições mínimas e máximas de créditos.
 
-``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Quem comanda?
+O administrador do sistema fica responsável por gerenciar todas as alocações e disciplinas, por meio do seu acesso é possível cadastrar, editar e remover uma disciplina, além de realizar consultas como: Ver todas as intenções de matrícula, ver os registros por disciplina ou ver a solicitação de um aluno específico, e ainda pode realizar o download ``alocações.csv`` contendo todos esses dados
+###### Telas do administrador
+![](https://i.imgur.com/sVnyo18.png?1)
+## Tecnologias utilizadas:
+### Front:
+  - [Vuejs 3.0](https://github.com/vuejs/vue-cli)
+  - [Semantic-UI](https://github.com/Semantic-Org/Semantic-UI)
+### Back:
+  - Spring Boot, Maven
+  - Persistência: JPA com PostgreSQL
