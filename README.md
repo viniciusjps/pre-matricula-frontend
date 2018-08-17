@@ -1,4 +1,4 @@
-![node](https://img.shields.io/node/v/passport.svg)
+![node](https://img.shields.io/node/v/viniciusjps/pre-matricula-frontend.svg)
 ![GitHub top language](https://img.shields.io/github/languages/top/viniciusjps/pre-matricula-frontend.svg)
 ![GitHub language count](https://img.shields.io/github/languages/count/viniciusjps/pre-matricula-frontend.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/viniciusjps/pre-matricula-frontend.svg)
