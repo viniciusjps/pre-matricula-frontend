@@ -16,7 +16,7 @@ Sistema produzido para a disciplina de Projeto de Software, do curso de Ciência
   - [Cássio Eduardo](https://github.com/cassioegc)
   - [Hemillainy Santos](https://github.com/hemillainysantos)
   
-que pode ser acessado [clicando aqui](http://prematricula.herokuapp.com)
+que pode ser acessado [clicando aqui](https://prematricula.netlify.com/#/)
 
 ## Do que se trata?
 Esse sistema tem como objetivo otimizar o processo de pré matrículas do curso computação@ufcg. Nesse sistema o usuário faz seu cadastro por meio do email @ccc, preenche o formulário e pronto, já está apto a realizar as intenções de matrículas em disciplinas, desde que satisfaçam as condições mínimas e máximas de créditos.
